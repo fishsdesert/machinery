@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mechanical.mapper.MacSysUserMapper">
+    <resultMap id="bsseMap" type="com.example.mechanical.entity.MacSysUser">
+        <result column="id" jdbcType="INTEGER" property="id"/>
+        <result column="ACCID" jdbcType="VARCHAR" property="accid"/>
+        <result column="PASSWORD" jdbcType="VARCHAR" property="passWord"/>
+        <result column="USERNAME" jdbcType="VARCHAR" property="userName"/>
+        <result column="DEPTNAME" jdbcType="VARCHAR" property="deptName"/>
+        <result column="DEPTID" jdbcType="VARCHAR" property="deptId"/>
+        <result column="ROLETYPE" jdbcType="VARCHAR" property="roleType"/>
+        <result column="URESB" jdbcType="VARCHAR" property="uresb"/>
+    </resultMap>
+    <sql id="Field">
+        ID,ACCID,PASSWORD,USERNAME,DEPTNAME,DEPTID,ROLETYPE,URESB
+    </sql>
+    <select id="querMacSysUser" resultType="com.example.mechanical.entity.MacSysUser">
+        select <include refid="Field"/> from MAC_SYS_USER
+    </select>
+
+</mapper>
