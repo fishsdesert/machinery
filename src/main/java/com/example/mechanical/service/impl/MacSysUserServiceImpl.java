@@ -19,7 +19,7 @@ public class MacSysUserServiceImpl implements MacSysUserService {
     public MacSysUserMapper macSysUserMapper;
 
     @Override
-    public List<MacSysUser> QuerMacSysUser() {
-        return macSysUserMapper.querMacSysUser();
+    public List<MacSysUser> QuerMacSysUser(MacSysUser macSysUser) {
+        return macSysUserMapper.querMacSysUser(macSysUser);
     }
 }

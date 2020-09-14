@@ -2,6 +2,7 @@ package com.example.mechanical.mapper;
 
 import com.example.mechanical.entity.MacSysUser;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -13,6 +14,6 @@ import java.util.List;
 @Mapper
 public interface MacSysUserMapper {
 
-    List<MacSysUser> querMacSysUser();
+    List<MacSysUser> querMacSysUser(@Param("macSysUser") MacSysUser macSysUser);
 
 }
