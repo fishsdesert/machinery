@@ -17,6 +17,6 @@ public interface MacSysUserService {
      * 查询用户表
      * @return
      */
-    List<MacSysUser> QuerMacSysUser();
+    List<MacSysUser> QuerMacSysUser(MacSysUser macSysUser);
 
 }

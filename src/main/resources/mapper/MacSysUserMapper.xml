@@ -15,7 +15,31 @@
         ID,ACCID,PASSWORD,USERNAME,DEPTNAME,DEPTID,ROLETYPE,URESB
     </sql>
     <select id="querMacSysUser" resultType="com.example.mechanical.entity.MacSysUser">
-        select <include refid="Field"/> from MAC_SYS_USER
+        select <include refid="Field"/> from MAC_SYS_USER user where 1=1
+        <if test="macSysUser.accid != null">
+            and user.ACCId = #{macSysUser.accid}
+        </if>
+        <if test="macSysUser.id != null">
+            and user.ID = #{macSysUser.id}
+        </if>
+        <if test="macSysUser.passWord != null">
+            and user.PASSWORD = #{macSysUser.passWord}
+        </if>
+        <if test="macSysUser.userName != null">
+            and user.USERNAME = #{macSysUser.userName}
+        </if>
+        <if test="macSysUser.deptName != null">
+            and user.DEPTNAME = #{macSysUser.deptName}
+        </if>
+        <if test="macSysUser.deptId != null">
+            and user.DEPTID = #{macSysUser.deptId}
+        </if>
+        <if test="macSysUser.roleType != null">
+            and user.ROLETYPE = #{macSysUser.roleType}
+        </if>
+        <if test="macSysUser.uresb != null">
+            and user.URESB = #{macSysUser.uresb}
+        </if>
     </select>
 
 </mapper>
