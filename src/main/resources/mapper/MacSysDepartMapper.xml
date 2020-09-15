@@ -1,5 +1,121 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.mechanical.mapper.MacSysDepartMapper">
+  <resultMap id="BaseResultMap" type="com.example.mechanical.entity.MacSysDepart">
+    <!--@mbg.generated-->
+    <!--@Table mac_sys_depart-->
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="DEPTID" jdbcType="VARCHAR" property="deptid" />
+    <result column="DEPTNAME" jdbcType="VARCHAR" property="deptname" />
+    <result column="DEPTTYPE" jdbcType="VARCHAR" property="depttype" />
+    <result column="ROLEID" jdbcType="VARCHAR" property="roleid" />
+    <result column="ROLENAME" jdbcType="VARCHAR" property="rolename" />
+    <result column="DRESB" jdbcType="VARCHAR" property="dresb" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    ID, DEPTID, DEPTNAME, DEPTTYPE, ROLEID, ROLENAME, DRESB
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from mac_sys_depart
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <!--@mbg.generated-->
+    delete from mac_sys_depart
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="ID" keyProperty="id" parameterType="com.example.mechanical.entity.MacSysDepart" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into mac_sys_depart (DEPTID, DEPTNAME, DEPTTYPE, 
+      ROLEID, ROLENAME, DRESB
+      )
+    values (#{deptid,jdbcType=VARCHAR}, #{deptname,jdbcType=VARCHAR}, #{depttype,jdbcType=VARCHAR}, 
+      #{roleid,jdbcType=VARCHAR}, #{rolename,jdbcType=VARCHAR}, #{dresb,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="ID" keyProperty="id" parameterType="com.example.mechanical.entity.MacSysDepart" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into mac_sys_depart
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="deptid != null">
+        DEPTID,
+      </if>
+      <if test="deptname != null">
+        DEPTNAME,
+      </if>
+      <if test="depttype != null">
+        DEPTTYPE,
+      </if>
+      <if test="roleid != null">
+        ROLEID,
+      </if>
+      <if test="rolename != null">
+        ROLENAME,
+      </if>
+      <if test="dresb != null">
+        DRESB,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="deptid != null">
+        #{deptid,jdbcType=VARCHAR},
+      </if>
+      <if test="deptname != null">
+        #{deptname,jdbcType=VARCHAR},
+      </if>
+      <if test="depttype != null">
+        #{depttype,jdbcType=VARCHAR},
+      </if>
+      <if test="roleid != null">
+        #{roleid,jdbcType=VARCHAR},
+      </if>
+      <if test="rolename != null">
+        #{rolename,jdbcType=VARCHAR},
+      </if>
+      <if test="dresb != null">
+        #{dresb,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.mechanical.entity.MacSysDepart">
+    <!--@mbg.generated-->
+    update mac_sys_depart
+    <set>
+      <if test="deptid != null">
+        DEPTID = #{deptid,jdbcType=VARCHAR},
+      </if>
+      <if test="deptname != null">
+        DEPTNAME = #{deptname,jdbcType=VARCHAR},
+      </if>
+      <if test="depttype != null">
+        DEPTTYPE = #{depttype,jdbcType=VARCHAR},
+      </if>
+      <if test="roleid != null">
+        ROLEID = #{roleid,jdbcType=VARCHAR},
+      </if>
+      <if test="rolename != null">
+        ROLENAME = #{rolename,jdbcType=VARCHAR},
+      </if>
+      <if test="dresb != null">
+        DRESB = #{dresb,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.mechanical.entity.MacSysDepart">
+    <!--@mbg.generated-->
+    update mac_sys_depart
+    set DEPTID = #{deptid,jdbcType=VARCHAR},
+      DEPTNAME = #{deptname,jdbcType=VARCHAR},
+      DEPTTYPE = #{depttype,jdbcType=VARCHAR},
+      ROLEID = #{roleid,jdbcType=VARCHAR},
+      ROLENAME = #{rolename,jdbcType=VARCHAR},
+      DRESB = #{dresb,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
 
 </mapper>

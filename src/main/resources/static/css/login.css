@@ -10,7 +10,7 @@
     margin-top: 10%;
     background-color: #e7e7e7;
     width: 400px;
-    height: 400px;
+    height: 350px;
     float: left;
     z-index: 9999;
     position: fixed;
@@ -77,9 +77,9 @@ i{
     margin-left: 165px;
 }
 .logoHead{
-    width: 250px;
+    width: 350px;
     height: 60px;
-    padding-left: 90px;
+    padding-left: 50px;
     padding-top: 25px;
 }
 .usernameLabel{
@@ -106,7 +106,7 @@ i{
 .submitDiv{
     width: 150px;
     height: 40px;
-    padding-left: 10px;
+    padding-left: 150px;
     padding-top: 28px;
     float: left;
 }
