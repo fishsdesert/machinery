@@ -33,9 +33,9 @@ public class MacSysUserController {
         try {
             MacSysUser macSysUser = new MacSysUser();
             String md5PassWord  = MyMD5Util.MD5(passWord);
-            macSysUser.setPassWord(md5PassWord);
+            macSysUser.setPassword(md5PassWord);
             //macSysUser.setPassWord(passWord);
-            macSysUser.setUserName(userName);
+            macSysUser.setAccid(userName);
             List<MacSysUser> macSysUsers = macSysUserService.QuerMacSysUser(macSysUser);
             if (macSysUsers.size() == 1) {
                 returnParameter.setParams(macSysUsers);
@@ -50,7 +50,7 @@ public class MacSysUserController {
             }
         }catch (Exception e){
             e.printStackTrace();
-            returnParameter.setState(200);
+            returnParameter.setState(500);
             returnParameter.setExplain("系统有误");
             return returnParameter;
         }
