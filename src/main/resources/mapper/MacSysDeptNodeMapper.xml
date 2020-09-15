@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mechanical.mapper.MacSysDeptNodeMapper">
+  <resultMap id="BaseResultMap" type="com.example.mechanical.entity.MacSysDeptNode">
+    <!--@mbg.generated-->
+    <!--@Table mac_sys_dept_node-->
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="DEPTID" jdbcType="VARCHAR" property="deptid" />
+    <result column="NODEID" jdbcType="VARCHAR" property="nodeid" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    ID, DEPTID, NODEID
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from mac_sys_dept_node
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <!--@mbg.generated-->
+    delete from mac_sys_dept_node
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="ID" keyProperty="id" parameterType="com.example.mechanical.entity.MacSysDeptNode" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into mac_sys_dept_node (DEPTID, NODEID)
+    values (#{deptid,jdbcType=VARCHAR}, #{nodeid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="ID" keyProperty="id" parameterType="com.example.mechanical.entity.MacSysDeptNode" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into mac_sys_dept_node
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="deptid != null">
+        DEPTID,
+      </if>
+      <if test="nodeid != null">
+        NODEID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="deptid != null">
+        #{deptid,jdbcType=VARCHAR},
+      </if>
+      <if test="nodeid != null">
+        #{nodeid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.mechanical.entity.MacSysDeptNode">
+    <!--@mbg.generated-->
+    update mac_sys_dept_node
+    <set>
+      <if test="deptid != null">
+        DEPTID = #{deptid,jdbcType=VARCHAR},
+      </if>
+      <if test="nodeid != null">
+        NODEID = #{nodeid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.mechanical.entity.MacSysDeptNode">
+    <!--@mbg.generated-->
+    update mac_sys_dept_node
+    set DEPTID = #{deptid,jdbcType=VARCHAR},
+      NODEID = #{nodeid,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

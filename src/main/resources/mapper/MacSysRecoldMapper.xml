@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mechanical.mapper.MacSysRecoldMapper">
+  <resultMap id="BaseResultMap" type="com.example.mechanical.entity.MacSysRecold">
+    <!--@mbg.generated-->
+    <!--@Table mac_sys_recold-->
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="FACCODE" jdbcType="VARCHAR" property="faccode" />
+    <result column="FACNAME" jdbcType="VARCHAR" property="facname" />
+    <result column="FACMODEL" jdbcType="VARCHAR" property="facmodel" />
+    <result column="FACSTATUS" jdbcType="VARCHAR" property="facstatus" />
+    <result column="STATUSFORE" jdbcType="VARCHAR" property="statusfore" />
+    <result column="WXPERSON" jdbcType="VARCHAR" property="wxperson" />
+    <result column="WXDATA" jdbcType="TIMESTAMP" property="wxdata" />
+    <result column="WXRECORD" jdbcType="VARCHAR" property="wxrecord" />
+    <result column="BXPERSON" jdbcType="VARCHAR" property="bxperson" />
+    <result column="BXDATA" jdbcType="TIMESTAMP" property="bxdata" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    ID, FACCODE, FACNAME, FACMODEL, FACSTATUS, STATUSFORE, WXPERSON, WXDATA, WXRECORD, 
+    BXPERSON, BXDATA
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from mac_sys_recold
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <!--@mbg.generated-->
+    delete from mac_sys_recold
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="ID" keyProperty="id" parameterType="com.example.mechanical.entity.MacSysRecold" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into mac_sys_recold (FACCODE, FACNAME, FACMODEL, 
+      FACSTATUS, STATUSFORE, WXPERSON, 
+      WXDATA, WXRECORD, BXPERSON, 
+      BXDATA)
+    values (#{faccode,jdbcType=VARCHAR}, #{facname,jdbcType=VARCHAR}, #{facmodel,jdbcType=VARCHAR}, 
+      #{facstatus,jdbcType=VARCHAR}, #{statusfore,jdbcType=VARCHAR}, #{wxperson,jdbcType=VARCHAR}, 
+      #{wxdata,jdbcType=TIMESTAMP}, #{wxrecord,jdbcType=VARCHAR}, #{bxperson,jdbcType=VARCHAR}, 
+      #{bxdata,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" keyColumn="ID" keyProperty="id" parameterType="com.example.mechanical.entity.MacSysRecold" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into mac_sys_recold
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="faccode != null">
+        FACCODE,
+      </if>
+      <if test="facname != null">
+        FACNAME,
+      </if>
+      <if test="facmodel != null">
+        FACMODEL,
+      </if>
+      <if test="facstatus != null">
+        FACSTATUS,
+      </if>
+      <if test="statusfore != null">
+        STATUSFORE,
+      </if>
+      <if test="wxperson != null">
+        WXPERSON,
+      </if>
+      <if test="wxdata != null">
+        WXDATA,
+      </if>
+      <if test="wxrecord != null">
+        WXRECORD,
+      </if>
+      <if test="bxperson != null">
+        BXPERSON,
+      </if>
+      <if test="bxdata != null">
+        BXDATA,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="faccode != null">
+        #{faccode,jdbcType=VARCHAR},
+      </if>
+      <if test="facname != null">
+        #{facname,jdbcType=VARCHAR},
+      </if>
+      <if test="facmodel != null">
+        #{facmodel,jdbcType=VARCHAR},
+      </if>
+      <if test="facstatus != null">
+        #{facstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="statusfore != null">
+        #{statusfore,jdbcType=VARCHAR},
+      </if>
+      <if test="wxperson != null">
+        #{wxperson,jdbcType=VARCHAR},
+      </if>
+      <if test="wxdata != null">
+        #{wxdata,jdbcType=TIMESTAMP},
+      </if>
+      <if test="wxrecord != null">
+        #{wxrecord,jdbcType=VARCHAR},
+      </if>
+      <if test="bxperson != null">
+        #{bxperson,jdbcType=VARCHAR},
+      </if>
+      <if test="bxdata != null">
+        #{bxdata,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.mechanical.entity.MacSysRecold">
+    <!--@mbg.generated-->
+    update mac_sys_recold
+    <set>
+      <if test="faccode != null">
+        FACCODE = #{faccode,jdbcType=VARCHAR},
+      </if>
+      <if test="facname != null">
+        FACNAME = #{facname,jdbcType=VARCHAR},
+      </if>
+      <if test="facmodel != null">
+        FACMODEL = #{facmodel,jdbcType=VARCHAR},
+      </if>
+      <if test="facstatus != null">
+        FACSTATUS = #{facstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="statusfore != null">
+        STATUSFORE = #{statusfore,jdbcType=VARCHAR},
+      </if>
+      <if test="wxperson != null">
+        WXPERSON = #{wxperson,jdbcType=VARCHAR},
+      </if>
+      <if test="wxdata != null">
+        WXDATA = #{wxdata,jdbcType=TIMESTAMP},
+      </if>
+      <if test="wxrecord != null">
+        WXRECORD = #{wxrecord,jdbcType=VARCHAR},
+      </if>
+      <if test="bxperson != null">
+        BXPERSON = #{bxperson,jdbcType=VARCHAR},
+      </if>
+      <if test="bxdata != null">
+        BXDATA = #{bxdata,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.mechanical.entity.MacSysRecold">
+    <!--@mbg.generated-->
+    update mac_sys_recold
+    set FACCODE = #{faccode,jdbcType=VARCHAR},
+      FACNAME = #{facname,jdbcType=VARCHAR},
+      FACMODEL = #{facmodel,jdbcType=VARCHAR},
+      FACSTATUS = #{facstatus,jdbcType=VARCHAR},
+      STATUSFORE = #{statusfore,jdbcType=VARCHAR},
+      WXPERSON = #{wxperson,jdbcType=VARCHAR},
+      WXDATA = #{wxdata,jdbcType=TIMESTAMP},
+      WXRECORD = #{wxrecord,jdbcType=VARCHAR},
+      BXPERSON = #{bxperson,jdbcType=VARCHAR},
+      BXDATA = #{bxdata,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

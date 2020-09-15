@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mechanical.mapper.MacSysFacilityMapper">
+  <resultMap id="BaseResultMap" type="com.example.mechanical.entity.MacSysFacility">
+    <!--@mbg.generated-->
+    <!--@Table mac_sys_facility-->
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="FACCODE" jdbcType="VARCHAR" property="faccode" />
+    <result column="FACNAME" jdbcType="VARCHAR" property="facname" />
+    <result column="FACMODEL" jdbcType="VARCHAR" property="facmodel" />
+    <result column="SPECTYPE" jdbcType="VARCHAR" property="spectype" />
+    <result column="LOCFLOOR" jdbcType="VARCHAR" property="locfloor" />
+    <result column="LOCSUBAREA" jdbcType="VARCHAR" property="locsubarea" />
+    <result column="INSTALLDATA" jdbcType="TIMESTAMP" property="installdata" />
+    <result column="USEDATA" jdbcType="TIMESTAMP" property="usedata" />
+    <result column="FRESA" jdbcType="VARCHAR" property="fresa" />
+    <result column="FRESB" jdbcType="VARCHAR" property="fresb" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    ID, FACCODE, FACNAME, FACMODEL, SPECTYPE, LOCFLOOR, LOCSUBAREA, INSTALLDATA, USEDATA, 
+    FRESA, FRESB
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from mac_sys_facility
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <!--@mbg.generated-->
+    delete from mac_sys_facility
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="ID" keyProperty="id" parameterType="com.example.mechanical.entity.MacSysFacility" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into mac_sys_facility (FACCODE, FACNAME, FACMODEL, 
+      SPECTYPE, LOCFLOOR, LOCSUBAREA, 
+      INSTALLDATA, USEDATA, FRESA, 
+      FRESB)
+    values (#{faccode,jdbcType=VARCHAR}, #{facname,jdbcType=VARCHAR}, #{facmodel,jdbcType=VARCHAR}, 
+      #{spectype,jdbcType=VARCHAR}, #{locfloor,jdbcType=VARCHAR}, #{locsubarea,jdbcType=VARCHAR}, 
+      #{installdata,jdbcType=TIMESTAMP}, #{usedata,jdbcType=TIMESTAMP}, #{fresa,jdbcType=VARCHAR}, 
+      #{fresb,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="ID" keyProperty="id" parameterType="com.example.mechanical.entity.MacSysFacility" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into mac_sys_facility
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="faccode != null">
+        FACCODE,
+      </if>
+      <if test="facname != null">
+        FACNAME,
+      </if>
+      <if test="facmodel != null">
+        FACMODEL,
+      </if>
+      <if test="spectype != null">
+        SPECTYPE,
+      </if>
+      <if test="locfloor != null">
+        LOCFLOOR,
+      </if>
+      <if test="locsubarea != null">
+        LOCSUBAREA,
+      </if>
+      <if test="installdata != null">
+        INSTALLDATA,
+      </if>
+      <if test="usedata != null">
+        USEDATA,
+      </if>
+      <if test="fresa != null">
+        FRESA,
+      </if>
+      <if test="fresb != null">
+        FRESB,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="faccode != null">
+        #{faccode,jdbcType=VARCHAR},
+      </if>
+      <if test="facname != null">
+        #{facname,jdbcType=VARCHAR},
+      </if>
+      <if test="facmodel != null">
+        #{facmodel,jdbcType=VARCHAR},
+      </if>
+      <if test="spectype != null">
+        #{spectype,jdbcType=VARCHAR},
+      </if>
+      <if test="locfloor != null">
+        #{locfloor,jdbcType=VARCHAR},
+      </if>
+      <if test="locsubarea != null">
+        #{locsubarea,jdbcType=VARCHAR},
+      </if>
+      <if test="installdata != null">
+        #{installdata,jdbcType=TIMESTAMP},
+      </if>
+      <if test="usedata != null">
+        #{usedata,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fresa != null">
+        #{fresa,jdbcType=VARCHAR},
+      </if>
+      <if test="fresb != null">
+        #{fresb,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.mechanical.entity.MacSysFacility">
+    <!--@mbg.generated-->
+    update mac_sys_facility
+    <set>
+      <if test="faccode != null">
+        FACCODE = #{faccode,jdbcType=VARCHAR},
+      </if>
+      <if test="facname != null">
+        FACNAME = #{facname,jdbcType=VARCHAR},
+      </if>
+      <if test="facmodel != null">
+        FACMODEL = #{facmodel,jdbcType=VARCHAR},
+      </if>
+      <if test="spectype != null">
+        SPECTYPE = #{spectype,jdbcType=VARCHAR},
+      </if>
+      <if test="locfloor != null">
+        LOCFLOOR = #{locfloor,jdbcType=VARCHAR},
+      </if>
+      <if test="locsubarea != null">
+        LOCSUBAREA = #{locsubarea,jdbcType=VARCHAR},
+      </if>
+      <if test="installdata != null">
+        INSTALLDATA = #{installdata,jdbcType=TIMESTAMP},
+      </if>
+      <if test="usedata != null">
+        USEDATA = #{usedata,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fresa != null">
+        FRESA = #{fresa,jdbcType=VARCHAR},
+      </if>
+      <if test="fresb != null">
+        FRESB = #{fresb,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.mechanical.entity.MacSysFacility">
+    <!--@mbg.generated-->
+    update mac_sys_facility
+    set FACCODE = #{faccode,jdbcType=VARCHAR},
+      FACNAME = #{facname,jdbcType=VARCHAR},
+      FACMODEL = #{facmodel,jdbcType=VARCHAR},
+      SPECTYPE = #{spectype,jdbcType=VARCHAR},
+      LOCFLOOR = #{locfloor,jdbcType=VARCHAR},
+      LOCSUBAREA = #{locsubarea,jdbcType=VARCHAR},
+      INSTALLDATA = #{installdata,jdbcType=TIMESTAMP},
+      USEDATA = #{usedata,jdbcType=TIMESTAMP},
+      FRESA = #{fresa,jdbcType=VARCHAR},
+      FRESB = #{fresb,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
