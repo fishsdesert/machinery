@@ -55,4 +55,10 @@ public class MacSysUserController {
             return returnParameter;
         }
     }
+
+    @RequestMapping(value = "/logins",method = RequestMethod.GET)
+    public String login(){
+        return "login.html";
+    }
+
 }

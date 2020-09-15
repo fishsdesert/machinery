@@ -7,7 +7,7 @@ $(function () {
         login();
     });
 });
-// 校验验证码、用户名、密码
+// 校验用户名、密码
 function validateCode() {
     var loginUsername = $('#loginUsername').val();
     var loginPassword = $('#loginPassword').val();
@@ -23,8 +23,9 @@ function validateCode() {
 }
 // 登录流程
 function login() {
+    debugger;
     if (!validateCode()){
-        //阻断提示
+        alert("用户名或密码不能为空");
     }else {
         var loginUsername = $('#loginUsername').val();
         var loginPassword = $('#loginPassword').val();
