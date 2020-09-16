@@ -44,7 +44,7 @@ public class MacSysUserController {
                 return returnParameter;
             } else {
                 returnParameter.setParams(macSysUsers);
-                returnParameter.setState(200);
+                returnParameter.setState(201);
                 returnParameter.setExplain("您输入的用户名或密码输入有误");
                 return returnParameter;
             }
@@ -59,6 +59,10 @@ public class MacSysUserController {
     @RequestMapping(value = "/logins",method = RequestMethod.GET)
     public String login(){
         return "login.html";
+    }
+    @RequestMapping(value = "/loginss",method = RequestMethod.GET)
+    public String loginss(){
+        return "index.html";
     }
 
 }

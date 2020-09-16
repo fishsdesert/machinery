@@ -29,19 +29,23 @@ function login() {
     }else {
         var loginUsername = $('#loginUsername').val();
         var loginPassword = $('#loginPassword').val();
-        //debugger;
-        var loginLoadIndex = layer.load(2);
-        $('#loginBtn').val("正在登录...");
+        //$('#loginBtn').val("正在登录...");
         $.ajax({
-            type: 'post',
-            url: 'localhost:8080/user/login',
-            dataType: 'text',
-            data: {"userName": loginUsername, "passWord": loginPassword},
-            contentType: 'application/json',
+            type: 'POST',
+             url: 'http://localhost:8080/user/login',
+            // url: 'localhost:8080/user/login?passWord=sdfsdfsdf&userName=123456',
+            dataType: 'JSON',
+            data: {
+                "userName": loginUsername,
+                "passWord": loginPassword
+            },
+           // contentType: 'application/json',
             success: function (data) {
-                //var jsonData = JSON.parse(data);
                 if (data.state == '200') {
-                    window.location.href = '../index.html';
+                    alert(data.explain);
+                    window.location.href = '../user/loginss';
+                }else {
+                    alert(data.explain);
                 }
             },
             error: function () {
