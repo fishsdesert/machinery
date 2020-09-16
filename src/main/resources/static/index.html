@@ -2,14 +2,22 @@
 <html>
 <head>
     <meta charset="utf-8">
+    <script src="../layui/layui-v2.5.6/layui/layui.all.js"></script>
+    <script>
+        //JavaScript代码区域
+        layui.use('element', function(){
+            var element = layui.element;
+
+        });
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>layout 后台大布局 - Layui</title>
-    <link rel="stylesheet" href="../static/layui/layui-v2.5.6/layui/css/layui.css">
+    <title>layout 后台管理 - Layui</title>
+    <link rel="stylesheet" href="../layui/layui-v2.5.6/layui/css/layui.css">
 </head>
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin">
     <div class="layui-header">
-        <div class="layui-logo">layui 后台布局</div>
+        <div class="layui-logo">建筑电气设备管理系统</div>
         <ul class="layui-nav layui-layout-right">
             <li class="layui-nav-item">
                 <a href="javascript:;">
@@ -29,29 +37,30 @@
         <div class="layui-side-scroll">
             <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
             <ul class="layui-nav layui-nav-tree"  lay-filter="test">
-                <li class="layui-nav-item layui-nav-itemed">
-                    <a class="" href="javascript:;">所有商品</a>
-                    <dl class="layui-nav-child">
-                        <dd><a href="javascript:;">列表一</a></dd>
-                        <dd><a href="">超链接</a></dd>
-                    </dl>
-                </li>
+                <!--
                 <li class="layui-nav-item">
                     <a href="javascript:;">解决方案</a>
                     <dl class="layui-nav-child">
                         <dd><a href="javascript:;">列表一</a></dd>
                         <dd><a href="">超链接</a></dd>
                     </dl>
-                </li>
-                <li class="layui-nav-item"><a href="">云市场</a></li>
-                <li class="layui-nav-item"><a href="">发布商品</a></li>
+                </li>-->
+                <d1>
+                <dd class="layui-nav-item"><a href="logins">部门管理</a></dd>
+                <!--<li class="layui-nav-item"><a href="">设备管理</a></li>
+                <li class="layui-nav-item"><a href="">维修管理</a></li>
+                <li class="layui-nav-item"><a href="">维修记录</a></li>
+                <li class="layui-nav-item"><a href="">用户管理</a></li>-->
+                </d1>
             </ul>
+
         </div>
     </div>
 
     <div class="layui-body">
         <!-- 内容主体区域 -->
-        <div style="padding: 15px;">内容主体区域</div>
+
+        <div style="height:100%;"><iframe src="../jsp/queryPersonOnGuardStatus.html" id="rightIframe" name="rightIframe" style="height:100%;width:100%;border:none;"></iframe></div>
     </div>
 
     <div class="layui-footer">
@@ -59,13 +68,5 @@
         <!--© layui.com - 底部固定区域-->
     </div>
 </div>
-<script src="../static/layui/layui-v2.5.6/layui/layui.all.js"></script>
-<script>
-    //JavaScript代码区域
-    layui.use('element', function(){
-        var element = layui.element;
-
-    });
-</script>
 </body>
 </html>

@@ -40,6 +40,11 @@
            <version>5.1.49</version>
         </dependency>
 
+        <dependency>
+            <groupId>net.sourceforge.nekohtml</groupId>
+            <artifactId>nekohtml</artifactId>
+            <version>1.9.22</version>
+        </dependency>
         <!--线程池-->
         <dependency>
             <groupId>com.mchange</groupId>
@@ -74,6 +79,11 @@
     </dependencies>
 
     <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
+        </resources>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
