@@ -6,12 +6,8 @@ import com.example.mechanical.tool.MyMD5Util;
 import com.example.mechanical.tool.ReturnParameter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -26,6 +22,12 @@ public class MacSysUserController {
     @Autowired
     public MacSysUserService macSysUserService;
 
+    /**
+     * 登录
+     * @param userName
+     * @param passWord
+     * @return
+     */
     @ResponseBody
     @RequestMapping(value = "/login",method = RequestMethod.POST)
     public ReturnParameter QuerMacSysUser(@RequestParam("userName") String userName,@RequestParam("passWord") String passWord){
@@ -55,6 +57,69 @@ public class MacSysUserController {
             return returnParameter;
         }
     }
+
+    /**
+     * 新增用户
+     * @param macSysUser
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/insertuser",method = RequestMethod.POST)
+    public ReturnParameter insertUser(@RequestParam("macSysUser") MacSysUser macSysUser){
+        ReturnParameter returnParameter = new ReturnParameter();
+        String explain;
+        try {
+            int num = macSysUserService.insertUser(macSysUser);
+            explain = num == 1 ? "添加成功！":"添加失败！";
+            returnParameter.setState(200);
+            returnParameter.setExplain(explain);
+            return returnParameter;
+        }catch (Exception e){
+            e.printStackTrace();
+            returnParameter.setState(500);
+            returnParameter.setExplain("添加失败");
+            return returnParameter;
+        }
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/deleteuser",method = RequestMethod.POST)
+    public ReturnParameter deleteUser(@RequestParam("id") Integer id){
+        ReturnParameter returnParameter = new ReturnParameter();
+        String explain;
+        try {
+            int param = macSysUserService.deleteUser(id);
+            explain = param == 1 ? "删除成功！":"删除失败！";
+            returnParameter.setState(200);
+            returnParameter.setExplain(explain);
+            return returnParameter;
+        }catch (Exception e){
+            e.printStackTrace();
+            returnParameter.setState(500);
+            returnParameter.setExplain("删除失败");
+            return returnParameter;
+        }
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/updateuser",method = RequestMethod.POST)
+    public ReturnParameter updateUser(@RequestParam("returnParameter") MacSysUser macSysUser){
+        ReturnParameter returnParameter = new ReturnParameter();
+        String explain;
+        try {
+            int param = macSysUserService.updateUser(macSysUser);
+            explain = param < 0 ? "修改成功！":"修改失败！";
+            returnParameter.setState(200);
+            returnParameter.setExplain(explain);
+            return returnParameter;
+        }catch (Exception e){
+            e.printStackTrace();
+            returnParameter.setState(500);
+            returnParameter.setExplain("修改失败");
+            return returnParameter;
+        }
+    }
+
 
     @RequestMapping(value = "/logins",method = RequestMethod.GET)
     public String login(){

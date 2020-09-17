@@ -23,4 +23,5 @@ public interface MacSysUserMapper {
     int updateByPrimaryKey(MacSysUser record);
 
     List<MacSysUser> querMacSysUser(@Param("macSysUser") MacSysUser macSysUser);
+
 }
