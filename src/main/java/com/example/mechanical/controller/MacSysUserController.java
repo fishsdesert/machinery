@@ -82,6 +82,11 @@ public class MacSysUserController {
         }
     }
 
+    /**
+     * 删除用户表
+     * @param id
+     * @return
+     */
     @ResponseBody
     @RequestMapping(value = "/deleteuser",method = RequestMethod.POST)
     public ReturnParameter deleteUser(@RequestParam("id") Integer id){
@@ -101,6 +106,11 @@ public class MacSysUserController {
         }
     }
 
+    /**
+     * 修改用户
+     * @param macSysUser
+     * @return
+     */
     @ResponseBody
     @RequestMapping(value = "/updateuser",method = RequestMethod.POST)
     public ReturnParameter updateUser(@RequestParam("returnParameter") MacSysUser macSysUser){
