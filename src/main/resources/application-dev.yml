@@ -19,6 +19,8 @@ spring:
 mybatis:
   mapper-locations: classpath:mapper/*Mapper.xml
   type-aliases-package: com.example.mechanical.entity
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 #
 logging:
   level:
