@@ -164,4 +164,43 @@
       FRESB = #{fresb,jdbcType=VARCHAR}
     where ID = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="selectListFacility" resultType="com.example.mechanical.entity.MacSysFacility">
+    select <include refid="Base_Column_List"/> from mac_sys_facility facility
+    <where>
+      <if test="macSysFacility.id != null">
+        and facility.ID = #{macSysFacility.id}
+      </if>
+      <if test="macSysFacility.faccode != null">
+        and facility.FACCODE = #{macSysFacility.faccode}
+      </if>
+      <if test="macSysFacility.facname != null">
+        and facility.FACNAME = #{macSysFacility.facname}
+      </if>
+      <if test="macSysFacility.facmodel != null">
+        and facility.FACMODEL = #{macSysFacility.facmodel}
+      </if>
+      <if test="macSysFacility.spectype != null">
+        and facility.SPECTYPE = #{macSysFacility.spectype}
+      </if>
+      <if test="macSysFacility.locfloor != null">
+        and facility.LOCFLOOR = #{macSysFacility.locfloor}
+      </if>
+      <if test="macSysFacility.locsubarea != null">
+        and facility.LOCSUBAREA = #{macSysFacility.locsubarea}
+      </if>
+      <if test="macSysFacility.installdata != null">
+        and facility.INSTALLDATA = #{macSysFacility.installdata}
+      </if>
+      <if test="macSysFacility.usedata != null">
+        and facility.USEDATA = #{macSysFacility.usedata}
+      </if>
+      <if test="macSysFacility.fresa != null">
+        and facility.FRESA = #{macSysFacility.fresa}
+      </if>
+      <if test="macSysFacility.fresb != null">
+        and facility.FRESB = #{macSysFacility.fresb}
+      </if>
+    </where>
+  </select>
 </mapper>

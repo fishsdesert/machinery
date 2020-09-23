@@ -170,18 +170,23 @@
                     type : "POST",
                     dataType : "JSON",
                     success : function(obj) {
-                        if (obj.state == '200') {
+                        if (obj.code == '0') {
                             layer.msg('登录成功', function () {
-                                window.location = '../index.html';
+                                var list = obj.data;
+                                for(var i in list){
+                                    var roletype = list[i].roletype;
+                                    var username = list[i].username;
+                                }
+                                window.location = '../index.html?roletype='+roletype;
                                 return true;
                             });
-                        } else if (obj.state == '201'){
-                            layer.msg(obj.explain);
+                        } else if (obj.code == '201'){
+                            layer.msg(obj.msg);
                             return false;
                         }
                     },
                     error:function (dates) {
-                        layer.msg(dates.explain);
+                        layer.msg(dates.msg);
                         return false;
                     }
                 });

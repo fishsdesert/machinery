@@ -41,20 +41,23 @@ public class MacSysUserController {
             macSysUser.setAccid(userName);
             List<MacSysUser> macSysUsers = macSysUserService.QuerMacSysUser(macSysUser);
             if (macSysUsers.size() == 1) {
-                returnParameter.setParams(macSysUsers);
-                returnParameter.setState(200);
-                returnParameter.setExplain("登录成功！");
+                returnParameter.setData(macSysUsers);
+                returnParameter.setCode(0);
+                returnParameter.setCount(macSysUsers.size());
+                returnParameter.setMsg("登录成功！");
                 return returnParameter;
             } else {
-                returnParameter.setParams(macSysUsers);
-                returnParameter.setState(201);
-                returnParameter.setExplain("您输入的用户名或密码输入有误");
+                returnParameter.setData(macSysUsers);
+                returnParameter.setCode(201);
+                returnParameter.setCount(0);
+                returnParameter.setMsg("您输入的用户名或密码输入有误");
                 return returnParameter;
             }
         }catch (Exception e){
             e.printStackTrace();
-            returnParameter.setState(500);
-            returnParameter.setExplain("系统有误");
+            returnParameter.setCode(500);
+            returnParameter.setCount(0);
+            returnParameter.setMsg("系统有误");
             return returnParameter;
         }
     }
@@ -72,13 +75,15 @@ public class MacSysUserController {
         try {
             int num = macSysUserService.insertUser(macSysUser);
             explain = num == 1 ? "添加成功！":"添加失败！";
-            returnParameter.setState(200);
-            returnParameter.setExplain(explain);
+            returnParameter.setCode(0);
+            returnParameter.setCount(num);
+            returnParameter.setMsg(explain);
             return returnParameter;
         }catch (Exception e){
             e.printStackTrace();
-            returnParameter.setState(500);
-            returnParameter.setExplain("添加失败");
+            returnParameter.setCode(500);
+            returnParameter.setCount(0);
+            returnParameter.setMsg("添加失败");
             return returnParameter;
         }
     }
@@ -96,13 +101,15 @@ public class MacSysUserController {
         try {
             int param = macSysUserService.deleteUser(id);
             explain = param == 1 ? "删除成功！":"删除失败！";
-            returnParameter.setState(200);
-            returnParameter.setExplain(explain);
+            returnParameter.setCode(0);
+            returnParameter.setCount(param);
+            returnParameter.setMsg(explain);
             return returnParameter;
         }catch (Exception e){
             e.printStackTrace();
-            returnParameter.setState(500);
-            returnParameter.setExplain("删除失败");
+            returnParameter.setCount(0);
+            returnParameter.setCode(500);
+            returnParameter.setMsg("删除失败");
             return returnParameter;
         }
     }
@@ -120,13 +127,15 @@ public class MacSysUserController {
         try {
             int param = macSysUserService.updateUser(macSysUser);
             explain = param < 0 ? "修改成功！":"修改失败！";
-            returnParameter.setState(200);
-            returnParameter.setExplain(explain);
+            returnParameter.setCode(0);
+            returnParameter.setCount(param);
+            returnParameter.setMsg(explain);
             return returnParameter;
         }catch (Exception e){
             e.printStackTrace();
-            returnParameter.setState(500);
-            returnParameter.setExplain("修改失败");
+            returnParameter.setCode(500);
+            returnParameter.setCount(0);
+            returnParameter.setMsg("修改失败");
             return returnParameter;
         }
     }

@@ -10,16 +10,22 @@ import java.util.List;
  */
 @Data
 public class ReturnParameter {
-    /**
-     * 主要的参数类型
-     */
-    List params;
+
     /**
      * 状态
      */
-    Integer  state;
+    Integer code;
     /**
      * 说明
      */
-    String explain;
+    String msg;
+    /**
+     * 总数
+     */
+    Integer count;
+    /**
+     * 主要的参数类型
+     */
+    List data;
+
 }

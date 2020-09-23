@@ -164,4 +164,42 @@
       BXDATA = #{bxdata,jdbcType=TIMESTAMP}
     where ID = #{id,jdbcType=INTEGER}
   </update>
+  <select id="selectrecold" resultType="com.example.mechanical.entity.MacSysRecold">
+    select <include refid="Base_Column_List"/> from mac_sys_recold recold
+    <where>
+      <if test="macSysRecold.id != null">
+        and recold.ID = #{macSysRecold.id}
+      </if>
+      <if test="macSysRecold.faccode != null">
+        and recold.FACCODE = #{macSysRecold.faccode}
+      </if>
+      <if test="macSysRecold.facname != null">
+        and recold.FACNAME = #{macSysRecold.facname}
+      </if>
+      <if test="macSysRecold.facmodel != null">
+        and recold.FACMODEL = #{macSysRecold.facmodel}
+      </if>
+      <if test="macSysRecold.facstatus != null">
+        and recold.FACSTATUS = #{macSysRecold.facstatus}
+      </if>
+      <if test="macSysRecold.statusfore != null">
+        and recold.STATUSFORE = #{macSysRecold.statusfore}
+      </if>
+      <if test="macSysRecold.wxperson != null">
+        and recold.WXPERSON = #{macSysRecold.wxperson}
+      </if>
+      <if test="macSysRecold.wxdata != null">
+        and recold.WXDATA = #{macSysRecold.wxdata}
+      </if>
+      <if test="macSysRecold.wxrecord != null">
+        and recold.WXRECORD = #{macSysRecold.wxrecord}
+      </if>
+      <if test="macSysRecold.bxperson != null">
+        and recold.BXPERSON = #{macSysRecold.bxperson}
+      </if>
+      <if test="macSysRecold.bxdata != null">
+        and recold.BXDATA = #{macSysRecold.bxdata}
+      </if>
+    </where>
+  </select>
 </mapper>
