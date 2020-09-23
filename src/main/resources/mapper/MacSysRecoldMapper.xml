@@ -167,37 +167,37 @@
   <select id="selectrecold" resultType="com.example.mechanical.entity.MacSysRecold">
     select <include refid="Base_Column_List"/> from mac_sys_recold recold
     <where>
-      <if test="macSysRecold.id != null">
+      <if test="macSysRecold.id != null and macSysRecold.id != ''">
         and recold.ID = #{macSysRecold.id}
       </if>
-      <if test="macSysRecold.faccode != null">
+      <if test="macSysRecold.faccode != null and macSysRecold.faccode != ''">
         and recold.FACCODE = #{macSysRecold.faccode}
       </if>
-      <if test="macSysRecold.facname != null">
+      <if test="macSysRecold.facname != null and macSysRecold.facname != ''">
         and recold.FACNAME = #{macSysRecold.facname}
       </if>
-      <if test="macSysRecold.facmodel != null">
+      <if test="macSysRecold.facmodel != null and macSysRecold.facmodel != ''">
         and recold.FACMODEL = #{macSysRecold.facmodel}
       </if>
-      <if test="macSysRecold.facstatus != null">
+      <if test="macSysRecold.facstatus != null and macSysRecold.facstatus != ''">
         and recold.FACSTATUS = #{macSysRecold.facstatus}
       </if>
-      <if test="macSysRecold.statusfore != null">
+      <if test="macSysRecold.statusfore != null and macSysRecold.statusfore != ''">
         and recold.STATUSFORE = #{macSysRecold.statusfore}
       </if>
-      <if test="macSysRecold.wxperson != null">
+      <if test="macSysRecold.wxperson != null and macSysRecold.wxperson != ''">
         and recold.WXPERSON = #{macSysRecold.wxperson}
       </if>
-      <if test="macSysRecold.wxdata != null">
+      <if test="macSysRecold.wxdata != null and macSysRecold.wxdata != ''">
         and recold.WXDATA = #{macSysRecold.wxdata}
       </if>
-      <if test="macSysRecold.wxrecord != null">
+      <if test="macSysRecold.wxrecord != null and macSysRecold.wxrecord != ''">
         and recold.WXRECORD = #{macSysRecold.wxrecord}
       </if>
-      <if test="macSysRecold.bxperson != null">
+      <if test="macSysRecold.bxperson != null and macSysRecold.bxperson != ''">
         and recold.BXPERSON = #{macSysRecold.bxperson}
       </if>
-      <if test="macSysRecold.bxdata != null">
+      <if test="macSysRecold.bxdata != null and macSysRecold.bxdata != ''">
         and recold.BXDATA = #{macSysRecold.bxdata}
       </if>
     </where>

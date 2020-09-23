@@ -1,7 +1,13 @@
 package com.example.mechanical.service.impl;
 
+import com.example.mechanical.entity.MacSysRecold;
+import com.example.mechanical.entity.MacSysRole;
+import com.example.mechanical.mapper.MacSysRoleMapper;
 import com.example.mechanical.service.MacSysRoleService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * @author HaoBaiKui
@@ -9,4 +15,10 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class MacSysRoleServiceImpl implements MacSysRoleService {
+    @Autowired
+    public MacSysRoleMapper macSysRoleMapper;
+    @Override
+    public List<MacSysRecold> selectrole(MacSysRole macSysRole) {
+        return macSysRoleMapper.selectrole(macSysRole);
+    }
 }

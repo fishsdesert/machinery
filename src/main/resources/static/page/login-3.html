@@ -177,6 +177,7 @@
                                     var roletype = list[i].roletype;
                                     var username = list[i].username;
                                 }
+                                localStorage.setItem("name",username);
                                 window.location = '../index.html?roletype='+roletype;
                                 return true;
                             });

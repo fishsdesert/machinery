@@ -1,5 +1,7 @@
 package com.example.mechanical.mapper;
 
+import com.example.mechanical.entity.MacSysRecold;
+import com.example.mechanical.entity.MacSysRole;
 import com.example.mechanical.entity.MacSysUser;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;import java.util.List;
@@ -23,5 +25,4 @@ public interface MacSysUserMapper {
     int updateByPrimaryKey(MacSysUser record);
 
     List<MacSysUser> querMacSysUser(@Param("macSysUser") MacSysUser macSysUser);
-
 }

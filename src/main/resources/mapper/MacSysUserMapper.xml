@@ -152,28 +152,28 @@
 <!--  </select>-->
     <select id="querMacSysUser" resultType="com.example.mechanical.entity.MacSysUser">
         select <include refid="Field" /> from MAC_SYS_USER user where 1=1
-      <if test="macSysUser.accid != null">
+      <if test="macSysUser.accid != null and macSysUser.accid != ''">
             and user.ACCId = #{macSysUser.accid}
         </if>
-        <if test="macSysUser.id != null">
+        <if test="macSysUser.id != null and macSysUser.id != ''">
             and user.ID = #{macSysUser.id}
         </if>
-        <if test="macSysUser.passWord != null">
+        <if test="macSysUser.password != null and macSysUser.password != ''">
             and user.PASSWORD = #{macSysUser.password}
         </if>
-        <if test="macSysUser.userName != null">
+        <if test="macSysUser.username != null and macSysUser.username != ''">
             and user.USERNAME = #{macSysUser.username}
         </if>
-        <if test="macSysUser.deptName != null">
+        <if test="macSysUser.deptname != null and macSysUser.deptname != ''">
             and user.DEPTNAME = #{macSysUser.deptname}
         </if>
-        <if test="macSysUser.deptId != null">
+        <if test="macSysUser.deptid != null and macSysUser.deptid != ''" >
             and user.DEPTID = #{macSysUser.deptid}
         </if>
-        <if test="macSysUser.roleType != null">
+        <if test="macSysUser.roletype != null and macSysUser.roletype != ''">
             and user.ROLETYPE = #{macSysUser.roletype}
         </if>
-        <if test="macSysUser.uresb != null">
+        <if test="macSysUser.uresb != null and macSysUser.uresb != ''">
             and user.URESB = #{macSysUser.uresb}
         </if>
     </select>

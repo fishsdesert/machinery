@@ -22,4 +22,9 @@ public class MacSysRecoldServiceImpl implements MacSysRecoldService {
     public List<MacSysRecold> selectrecold(MacSysRecold macSysRecold) {
         return macSysRecoldMapper.selectrecold(macSysRecold);
     }
+
+    @Override
+    public int updaterecold(MacSysRecold macSysRecold) {
+        return macSysRecoldMapper.updateByPrimaryKeySelective(macSysRecold);
+    }
 }

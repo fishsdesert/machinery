@@ -19,27 +19,15 @@
                 <form class="layui-form layui-form-pane" action="">
                     <div class="layui-form-item">
                         <div class="layui-inline">
-                            <label class="layui-form-label">用户姓名</label>
+                            <label class="layui-form-label">设备编码</label>
                             <div class="layui-input-inline">
-                                <input type="text" name="username" autocomplete="off" class="layui-input">
+                                <input type="text" name="faccode" autocomplete="off" class="layui-input">
                             </div>
                         </div>
                         <div class="layui-inline">
-                            <label class="layui-form-label">用户性别</label>
+                            <label class="layui-form-label">设备名称</label>
                             <div class="layui-input-inline">
-                                <input type="text" name="sex" autocomplete="off" class="layui-input">
-                            </div>
-                        </div>
-                        <div class="layui-inline">
-                            <label class="layui-form-label">用户城市</label>
-                            <div class="layui-input-inline">
-                                <input type="text" name="city" autocomplete="off" class="layui-input">
-                            </div>
-                        </div>
-                        <div class="layui-inline">
-                            <label class="layui-form-label">用户职业</label>
-                            <div class="layui-input-inline">
-                                <input type="text" name="classify" autocomplete="off" class="layui-input">
+                                <input type="text" name="facname" autocomplete="off" class="layui-input">
                             </div>
                         </div>
                         <div class="layui-inline">
@@ -50,18 +38,17 @@
             </div>
         </fieldset>
 
-        <script type="text/html" id="toolbarDemo">
+        <!--<script type="text/html" id="toolbarDemo">
             <div class="layui-btn-container">
                 <button class="layui-btn layui-btn-normal layui-btn-sm data-add-btn" lay-event="add"> 添加 </button>
                 <button class="layui-btn layui-btn-sm layui-btn-danger data-delete-btn" lay-event="delete"> 删除 </button>
             </div>
-        </script>
+        </script>-->
 
         <table class="layui-hide" id="currentTableId" lay-filter="currentTableFilter"></table>
 
         <script type="text/html" id="currentTableBar">
-            <a class="layui-btn layui-btn-normal layui-btn-xs data-count-edit" lay-event="edit">编辑</a>
-            <a class="layui-btn layui-btn-xs layui-btn-danger data-count-delete" lay-event="delete">删除</a>
+            <a id="edits" class="layui-btn layui-btn-normal layui-btn-xs data-count-edit" lay-event="edit">报修</a>
         </script>
 
     </div>
@@ -77,18 +64,26 @@
             elem: '#currentTableId',
             url: '/recold/selectrecold',
             toolbar: '#toolbarDemo',
+            method: 'post',
+            contentType: 'application/json;charset=UTF-8',
             defaultToolbar: ['filter', 'exports', 'print', {
                 title: '提示',
                 layEvent: 'LAYTABLE_TIPS',
                 icon: 'layui-icon-tips'
             }],
             cols: [[
-                {type: "checkbox", width: 50},
+                //{type: "checkbox", width: 50},
                 {field: 'id', width: 80, title: 'ID', sort: true},
                 {field: 'faccode', width: 80, title: '设备编码'},
                 {field: 'facname', width: 80, title: '设备名称', sort: true},
                 {field: 'facmodel', width: 80, title: '设备型号'},
-                {field: 'facstatus', title: '设备状态', minWidth: 150},
+                {field:'facstatus',title: '设备状态',sort:true,align:'center',minWidth:100,templet: function(d){
+                    if (d.facstatus == '1') {
+                        return "正常";
+                    } else {
+                        return "维修中...";
+                    }
+                 }},
                 {field: 'statusfore', width: 80, title: '设备预测', sort: true},
                 {field: 'wxperson', width: 80, title: '维修人', sort: true},
                 {field: 'wxdata', width: 80, title: '维修时间'},
@@ -105,10 +100,12 @@
 
         // 监听搜索操作
         form.on('submit(data-search-btn)', function (data) {
+
             var result = JSON.stringify(data.field);
-            layer.alert(result, {
+            console.log(data.field);
+            /*layer.alert(result, {
                 title: '最终的搜索信息'
-            });
+            });*/
 
             //执行搜索重载
             table.reload('currentTableId', {
@@ -116,7 +113,17 @@
                     curr: 1
                 }
                 , where: {
-                    searchParams: result
+                    id: null,
+                    faccode: data.field.faccode,
+                    facname: data.field.facname,
+                    facmodel: null,
+                    facstatus: null,
+                    statusfore: null,
+                    wxperson: null,
+                    wxdata: null,
+                    wxrecord: null,
+                    bxperson: null,
+                    bxdata: null
                 }
             }, 'data');
 
@@ -154,9 +161,32 @@
 
         table.on('tool(currentTableFilter)', function (obj) {
             var data = obj.data;
+            data.bxperson = localStorage["name"];
+            //console.log(localStorage["name"]);
             if (obj.event === 'edit') {
-
-                var index = layer.open({
+                layer.alert("正在报修...",function () {
+                    $.ajax({
+                        url : "/recold/updaterecold",
+                        data :JSON.stringify(data),
+                        type : "POST",
+                        contentType: 'application/json;charset=UTF-8',
+                        dataType : "JSON",
+                        success : function(obj) {
+                            if (obj.code == '0') {
+                                layer.msg('报修完成', function () {
+                                    /*$("#edits").attr("disabled", true);
+                                    $("#edits").click(function(){});*/
+                                    return true;
+                                });
+                            }
+                        },
+                        error:function (dates) {
+                            layer.msg("报修失败");
+                            return false;
+                        }
+                    });
+                })
+                /*var index = layer.open({
                     title: '编辑用户',
                     type: 2,
                     shade: 0.2,
@@ -167,13 +197,8 @@
                 });
                 $(window).on("resize", function () {
                     layer.full(index);
-                });
+                });*/
                 return false;
-            } else if (obj.event === 'delete') {
-                layer.confirm('真的删除行么', function (index) {
-                    obj.del();
-                    layer.close(index);
-                });
             }
         });
 

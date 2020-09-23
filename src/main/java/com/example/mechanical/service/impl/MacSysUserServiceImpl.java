@@ -1,5 +1,7 @@
 package com.example.mechanical.service.impl;
 
+import com.example.mechanical.entity.MacSysRecold;
+import com.example.mechanical.entity.MacSysRole;
 import com.example.mechanical.entity.MacSysUser;
 import com.example.mechanical.mapper.MacSysUserMapper;
 import com.example.mechanical.service.MacSysUserService;
@@ -58,4 +60,5 @@ public class MacSysUserServiceImpl implements MacSysUserService {
     public int updateUser(MacSysUser macSysUser) {
         return macSysUserMapper.updateByPrimaryKeySelective(macSysUser);
     }
+
 }

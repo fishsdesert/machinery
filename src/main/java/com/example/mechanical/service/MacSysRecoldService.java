@@ -10,4 +10,6 @@ import java.util.List;
  */
 public interface MacSysRecoldService {
     List<MacSysRecold> selectrecold(MacSysRecold macSysRecold);
+
+    int updaterecold(MacSysRecold macSysRecold);
 }

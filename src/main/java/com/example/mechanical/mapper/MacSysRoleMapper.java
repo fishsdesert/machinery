@@ -1,11 +1,17 @@
 package com.example.mechanical.mapper;
 
+import com.example.mechanical.entity.MacSysRecold;
 import com.example.mechanical.entity.MacSysRole;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * @author  HaoBaiKui
  * @date  2020/9/15 9:51
  */
+@Mapper
 public interface MacSysRoleMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -18,4 +24,6 @@ public interface MacSysRoleMapper {
     int updateByPrimaryKeySelective(MacSysRole record);
 
     int updateByPrimaryKey(MacSysRole record);
+
+    List<MacSysRecold> selectrole(@Param("macSysRole") MacSysRole macSysRole);
 }

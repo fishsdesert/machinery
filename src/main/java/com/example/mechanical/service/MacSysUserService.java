@@ -1,5 +1,7 @@
 package com.example.mechanical.service;
 
+import com.example.mechanical.entity.MacSysRecold;
+import com.example.mechanical.entity.MacSysRole;
 import com.example.mechanical.entity.MacSysUser;
 import com.example.mechanical.tool.ReturnParameter;
 import org.springframework.stereotype.Service;
@@ -39,4 +41,5 @@ public interface MacSysUserService {
      * @return
      */
     int updateUser(MacSysUser macSysUser);
+
 }
