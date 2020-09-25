@@ -118,4 +118,31 @@
     where ID = #{id,jdbcType=INTEGER}
   </update>
 
+  <select id="querMacSysDepart" resultType="com.example.mechanical.entity.MacSysDepart">
+    select <include refid="Base_Column_List"/> from mac_sys_depart depart
+    <where>
+      <if test="macSysDepart.id != null and macSysDepart.id != ''">
+        and depart.ID = #{macSysDepart.id}
+      </if>
+      <if test="macSysDepart.deptid != null and macSysDepart.deptid != ''">
+        and depart.DEPTID = #{macSysDepart.deptid}
+      </if>
+      <if test="macSysDepart.deptname != null and macSysDepart.deptname != ''">
+        and depart.DEPTNAME = #{macSysDepart.deptname}
+      </if>
+      <if test="macSysDepart.depttype != null and macSysDepart.depttype != ''">
+        and depart.DEPTTYPE = #{macSysDepart.depttype}
+      </if>
+      <if test="macSysDepart.roleid != null and macSysDepart.roleid != ''">
+        and depart.ROLEID = #{macSysDepart.roleid}
+      </if>
+      <if test="macSysDepart.rolename != null and macSysDepart.rolename != ''">
+        and depart.ROLENAME = #{macSysDepart.rolename}
+      </if>
+      <if test="macSysDepart.dresb != null and macSysDepart.dresb != ''">
+        and depart.DRESB = #{macSysDepart.dresb}
+      </if>
+    </where>
+  </select>
+
 </mapper>

@@ -89,8 +89,8 @@
                 {field: 'wxdata', width: 80, title: '维修时间'},
                 {field: 'wxrecord', width: 135, title: '维修记录', sort: true},
                 {field: 'bxperson', width: 80, title: '报修人'},
-                {field: 'bxdata', width: 135, title: '保修时间'},
-                {title: '操作', minWidth: 150, toolbar: '#currentTableBar', align: "center"}
+                {field: 'bxdata', width: 135, title: '保修时间'} //,
+                //{title: '操作', minWidth: 150, toolbar: '#currentTableBar', align: "center"}
             ]],
             limits: [10, 15, 20, 25, 50, 100],
             limit: 15,
@@ -102,7 +102,7 @@
         form.on('submit(data-search-btn)', function (data) {
 
             var result = JSON.stringify(data.field);
-            console.log(data.field);
+            //console.log(data.field);
             /*layer.alert(result, {
                 title: '最终的搜索信息'
             });*/
@@ -156,7 +156,7 @@
 
         //监听表格复选框选择
         table.on('checkbox(currentTableFilter)', function (obj) {
-            console.log(obj)
+            //console.log(obj)
         });
 
         table.on('tool(currentTableFilter)', function (obj) {

@@ -49,8 +49,9 @@
 
         <script type="text/html" id="currentTableBar">
             <a id="edits" class="layui-btn layui-btn-normal layui-btn-xs data-count-edit" lay-event="edit">编辑</a>
+<!--
             <a id="deletes" class="layui-btn layui-btn-normal layui-btn-xs data-count-edit" lay-event="delete">删除</a>
-
+-->
         </script>
 
     </div>
@@ -99,7 +100,7 @@
         form.on('submit(data-search-btn)', function (data) {
 
             var result = JSON.stringify(data.field);
-            console.log(data.field);
+            //console.log(data.field);
             /*layer.alert(result, {
                 title: '最终的搜索信息'
             });*/
@@ -136,40 +137,46 @@
                     maxmin:true,
                     shadeClose: true,
                     area: ['100%', '100%'],
-                    content: '../page/table/add.html',
+                    content: '../page/table/adduser.html',
                 });
                 $(window).on("resize", function () {
                     layer.full(index);
                 });
             } else if (obj.event === 'delete') {  // 监听删除操作
-                debugger;
-                console.log(obj);
-                layer.alert("正在删除...",function () {
-                    $.ajax({
-                        url : "/user/deleteuser",
-                        data :{id:5},
-                        type : "POST",
-                        contentType: 'application/json;charset=UTF-8',
-                        dataType : "JSON",
-                        success : function(obj) {
-                            if (obj.code == '0') {
-                                layer.msg('删除成功', function () {
-                                    return true;
-                                });
+                var selectData = layui.table.checkStatus('currentTableId').data;
+                for(var i in selectData) {
+                    var roleid = selectData[i].id;
+                    layer.alert("正在删除...", function () {
+                        $.ajax({
+                            url: "/user/deleteuser",
+                            data: {"id": roleid},
+                            type: "POST",
+                            dataType: "JSON",
+                            success: function (obj) {
+                                if (obj.code == '0') {
+                                    layer.msg('删除成功', function () {
+                                        table.reload('currentTableId', {
+                                            page: {
+                                                curr: 1
+                                            }
+                                        }, 'data');
+                                        return true;
+                                    });
+                                }
+                            },
+                            error: function (dates) {
+                                layer.msg("删除失败");
+                                return false;
                             }
-                        },
-                        error:function (dates) {
-                            layer.msg("删除失败");
-                            return false;
-                        }
-                    });
-                })
+                        });
+                    })
+                }
             }
         });
 
         //监听表格复选框选择
         table.on('checkbox(currentTableFilter)', function (obj) {
-            console.log(obj)
+            //console.log(obj)
         });
 
         table.on('tool(currentTableFilter)', function (obj) {
@@ -187,8 +194,6 @@
                         success : function(obj) {
                             if (obj.code == '0') {
                                 layer.msg('报修完成', function () {
-                                    /*$("#edits").attr("disabled", true);
-                                    $("#edits").click(function(){});*/
                                     return true;
                                 });
                             }

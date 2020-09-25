@@ -19,25 +19,25 @@
                 <form class="layui-form layui-form-pane" action="">
                     <div class="layui-form-item">
                         <div class="layui-inline">
-                            <label class="layui-form-label">用户姓名</label>
+                            <label class="layui-form-label">设备名称</label>
                             <div class="layui-input-inline">
                                 <input type="text" name="username" autocomplete="off" class="layui-input">
                             </div>
                         </div>
                         <div class="layui-inline">
-                            <label class="layui-form-label">用户性别</label>
+                            <label class="layui-form-label">设备编码</label>
                             <div class="layui-input-inline">
                                 <input type="text" name="sex" autocomplete="off" class="layui-input">
                             </div>
                         </div>
                         <div class="layui-inline">
-                            <label class="layui-form-label">用户城市</label>
+                            <label class="layui-form-label">所在楼层</label>
                             <div class="layui-input-inline">
                                 <input type="text" name="city" autocomplete="off" class="layui-input">
                             </div>
                         </div>
                         <div class="layui-inline">
-                            <label class="layui-form-label">用户职业</label>
+                            <label class="layui-form-label">所在区域</label>
                             <div class="layui-input-inline">
                                 <input type="text" name="classify" autocomplete="off" class="layui-input">
                             </div>
@@ -52,7 +52,7 @@
 
         <script type="text/html" id="toolbarDemo">
             <div class="layui-btn-container">
-                <button class="layui-btn layui-btn-normal layui-btn-sm data-add-btn" lay-event="add"> 添加 </button>
+                <button class="layui-btn layui-btn-normal layui-btn-sm data-add-btn" lay-event="add"> 新增 </button>
                 <button class="layui-btn layui-btn-sm layui-btn-danger data-delete-btn" lay-event="delete"> 删除 </button>
             </div>
         </script>
@@ -61,7 +61,6 @@
 
         <script type="text/html" id="currentTableBar">
             <a class="layui-btn layui-btn-normal layui-btn-xs data-count-edit" lay-event="edit">编辑</a>
-            <a class="layui-btn layui-btn-xs layui-btn-danger data-count-delete" lay-event="delete">删除</a>
         </script>
 
     </div>
@@ -135,21 +134,47 @@
                     maxmin:true,
                     shadeClose: true,
                     area: ['100%', '100%'],
-                    content: '../page/table/add.html',
+                    content: '../page/table/addfacility.html'
                 });
                 $(window).on("resize", function () {
                     layer.full(index);
                 });
             } else if (obj.event === 'delete') {  // 监听删除操作
-                var checkStatus = table.checkStatus('currentTableId')
-                    , data = checkStatus.data;
-                layer.alert(JSON.stringify(data));
+                var selectData = layui.table.checkStatus('currentTableId').data;
+                for(var i in selectData) {
+                    var factiltyid = selectData[i].id;
+                    console.log(factiltyid);
+                    layer.alert("正在删除...", function () {
+                        $.ajax({
+                            url: "/facility/deletefacility",
+                            data: {"id": factiltyid},
+                            type: "POST",
+                            dataType: "JSON",
+                            success: function (obj) {
+                                if (obj.code == '0') {
+                                    layer.msg('删除成功', function () {
+                                        table.reload('currentTableId', {
+                                            page: {
+                                                curr: 1
+                                            }
+                                        }, 'data');
+                                        return true;
+                                    });
+                                }
+                            },
+                            error: function (dates) {
+                                layer.msg("删除失败");
+                                return false;
+                            }
+                        });
+                    })
+                }
             }
         });
 
         //监听表格复选框选择
         table.on('checkbox(currentTableFilter)', function (obj) {
-            console.log(obj)
+            //console.log(obj)
         });
 
         table.on('tool(currentTableFilter)', function (obj) {
@@ -170,10 +195,35 @@
                 });
                 return false;
             } else if (obj.event === 'delete') {
-                layer.confirm('真的删除行么', function (index) {
-                    obj.del();
-                    layer.close(index);
-                });
+                var selectData = layui.table.checkStatus('currentTableId').data;
+                for(var i in selectData) {
+                    var factiltyid = selectData[i].id;
+                    console.log(factiltyid);
+                    layer.alert("正在删除...", function () {
+                        $.ajax({
+                            url: "/facility/deletefacility",
+                            data: {"id": factiltyid},
+                            type: "POST",
+                            dataType: "JSON",
+                            success: function (obj) {
+                                if (obj.code == '0') {
+                                    layer.msg('删除成功', function () {
+                                        table.reload('currentTableId', {
+                                            page: {
+                                                curr: 1
+                                            }
+                                        }, 'data');
+                                        return true;
+                                    });
+                                }
+                            },
+                            error: function (dates) {
+                                layer.msg("删除失败");
+                                return false;
+                            }
+                        });
+                    })
+                }
             }
         });
 

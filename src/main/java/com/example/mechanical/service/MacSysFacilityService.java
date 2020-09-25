@@ -10,4 +10,6 @@ import java.util.List;
  */
 public interface MacSysFacilityService {
     List<MacSysFacility> selectListFacility(MacSysFacility macSysFacility);
+
+    int deleteFacility(Integer id);
 }

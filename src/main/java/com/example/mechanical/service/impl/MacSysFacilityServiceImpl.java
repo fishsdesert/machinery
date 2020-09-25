@@ -22,4 +22,9 @@ public class MacSysFacilityServiceImpl implements MacSysFacilityService {
     public List<MacSysFacility> selectListFacility(MacSysFacility macSysFacility) {
         return macSysFacilityMapper.selectListFacility(macSysFacility);
     }
+
+    @Override
+    public int deleteFacility(Integer id) {
+        return macSysFacilityMapper.deleteByPrimaryKey(id);
+    }
 }

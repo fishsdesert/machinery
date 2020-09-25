@@ -6,6 +6,7 @@ import com.example.mechanical.tool.ReturnParameter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
@@ -44,4 +45,29 @@ public class MacSysFacilityController {
             return returnParameter;
         }
     }
+
+    /**
+     * 删除设备信息
+     * @param id
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/deletefacility")
+    public ReturnParameter deleteFacility(@RequestParam("id") Integer id){
+        ReturnParameter returnParameter =  new ReturnParameter();
+        try {
+            int num =  macSysFacilityService.deleteFacility(id);
+            returnParameter.setCount(num);
+            returnParameter.setCode(0);
+            returnParameter.setMsg("删除成功！");
+            return returnParameter;
+        }catch (Exception e){
+            returnParameter.setCode(500);
+            returnParameter.setCount(0);
+            returnParameter.setMsg("删除失败！");
+            return returnParameter;
+        }
+    }
+
+
 }
