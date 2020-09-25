@@ -1,11 +1,9 @@
 package com.example.mechanical.mapper;
 
 import com.example.mechanical.entity.MacSysDepart;
-import com.example.mechanical.entity.MacSysUser;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-import javax.websocket.server.PathParam;
 import java.util.List;
 
 /**

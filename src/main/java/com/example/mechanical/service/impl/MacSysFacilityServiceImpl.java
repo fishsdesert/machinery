@@ -27,4 +27,14 @@ public class MacSysFacilityServiceImpl implements MacSysFacilityService {
     public int deleteFacility(Integer id) {
         return macSysFacilityMapper.deleteByPrimaryKey(id);
     }
+
+    @Override
+    public int updateFacility(MacSysFacility macSysFacility) {
+        return macSysFacilityMapper.updateByPrimaryKeySelective(macSysFacility);
+    }
+
+    @Override
+    public int insertFacility(MacSysFacility macSysFacility) {
+        return macSysFacilityMapper.insertSelective(macSysFacility);
+    }
 }

@@ -32,7 +32,6 @@ public class MacSysUserController {
     @ResponseBody
     @RequestMapping(value = "/login",method = RequestMethod.POST)
     public ReturnParameter QuerMacSysUser(@RequestParam("userName") String userName,@RequestParam("passWord") String passWord){
-        //,@RequestParam("page") Integer page,@RequestParam("limit") Integer limit
         ReturnParameter returnParameter =  new ReturnParameter();
         try {
             MacSysUser macSysUser = new MacSysUser();

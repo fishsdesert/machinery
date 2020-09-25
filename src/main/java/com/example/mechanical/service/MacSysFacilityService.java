@@ -12,4 +12,8 @@ public interface MacSysFacilityService {
     List<MacSysFacility> selectListFacility(MacSysFacility macSysFacility);
 
     int deleteFacility(Integer id);
+
+    int updateFacility(MacSysFacility macSysFacility);
+
+    int insertFacility(MacSysFacility macSysFacility);
 }

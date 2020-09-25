@@ -1,7 +1,6 @@
 package com.example.mechanical.service;
 
 import com.example.mechanical.entity.MacSysDepart;
-import com.example.mechanical.entity.MacSysUser;
 
 import java.util.List;
 
@@ -11,4 +10,10 @@ import java.util.List;
  */
 public interface MacSysDepartService {
     List<MacSysDepart> querMacSysDepart(MacSysDepart macSysDepart);
+
+    int deteleDepart(Integer id);
+
+    int intsertDepart(MacSysDepart macSysDepart);
+
+    int updateDepart(MacSysDepart macSysDepart);
 }

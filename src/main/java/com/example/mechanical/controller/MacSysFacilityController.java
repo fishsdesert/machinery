@@ -5,6 +5,7 @@ import com.example.mechanical.service.MacSysFacilityService;
 import com.example.mechanical.tool.ReturnParameter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -29,7 +30,7 @@ public class MacSysFacilityController {
      */
     @ResponseBody
     @RequestMapping("/selectFacility")
-    public ReturnParameter selectFacility(MacSysFacility macSysFacility){
+    public ReturnParameter selectFacility(@RequestBody MacSysFacility macSysFacility){
         ReturnParameter returnParameter =  new ReturnParameter();
         try {
            List<MacSysFacility> facilititys =  macSysFacilityService.selectListFacility(macSysFacility);
@@ -69,5 +70,50 @@ public class MacSysFacilityController {
         }
     }
 
+    /**
+     * 修改设备信息
+     * @param macSysFacility
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/updatefacility")
+    public ReturnParameter updateFacility(@RequestBody MacSysFacility macSysFacility){
+        ReturnParameter returnParameter =  new ReturnParameter();
+        try {
+            int facilititys =  macSysFacilityService.updateFacility(macSysFacility);
+            returnParameter.setCount(facilititys);
+            returnParameter.setCode(0);
+            returnParameter.setMsg("查询成功！");
+            return returnParameter;
+        }catch (Exception e){
+            returnParameter.setCode(500);
+            returnParameter.setCount(0);
+            returnParameter.setMsg("查询失败！");
+            return returnParameter;
+        }
+    }
+
+    /**
+     * 新增设备信息
+     * @param macSysFacility
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/insertfacility")
+    public ReturnParameter insertFacility(@RequestBody MacSysFacility macSysFacility){
+        ReturnParameter returnParameter =  new ReturnParameter();
+        try {
+            int facilititys =  macSysFacilityService.insertFacility(macSysFacility);
+            returnParameter.setCount(facilititys);
+            returnParameter.setCode(0);
+            returnParameter.setMsg("查询成功！");
+            return returnParameter;
+        }catch (Exception e){
+            returnParameter.setCode(500);
+            returnParameter.setCount(0);
+            returnParameter.setMsg("查询失败！");
+            return returnParameter;
+        }
+    }
 
 }
