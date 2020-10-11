@@ -168,37 +168,37 @@
   <select id="selectListFacility" resultType="com.example.mechanical.entity.MacSysFacility">
     select <include refid="Base_Column_List"/> from mac_sys_facility facility
     <where>
-      <if test="macSysFacility.id != null">
+      <if test="macSysFacility.id != null and macSysFacility.id != ''">
         and facility.ID = #{macSysFacility.id}
       </if>
-      <if test="macSysFacility.faccode != null">
+      <if test="macSysFacility.faccode != null and macSysFacility.faccode != ''">
         and facility.FACCODE = #{macSysFacility.faccode}
       </if>
-      <if test="macSysFacility.facname != null">
+      <if test="macSysFacility.facname != null and macSysFacility.facname != ''">
         and facility.FACNAME = #{macSysFacility.facname}
       </if>
-      <if test="macSysFacility.facmodel != null">
+      <if test="macSysFacility.facmodel != null and macSysFacility.facmodel != ''">
         and facility.FACMODEL = #{macSysFacility.facmodel}
       </if>
-      <if test="macSysFacility.spectype != null">
+      <if test="macSysFacility.spectype != null and macSysFacility.spectype != ''">
         and facility.SPECTYPE = #{macSysFacility.spectype}
       </if>
-      <if test="macSysFacility.locfloor != null">
+      <if test="macSysFacility.locfloor != null and macSysFacility.locfloor != ''">
         and facility.LOCFLOOR = #{macSysFacility.locfloor}
       </if>
-      <if test="macSysFacility.locsubarea != null">
+      <if test="macSysFacility.locsubarea != null and macSysFacility.locsubarea != ''">
         and facility.LOCSUBAREA = #{macSysFacility.locsubarea}
       </if>
-      <if test="macSysFacility.installdata != null">
+      <if test="macSysFacility.installdata != null and macSysFacility.installdata != ''">
         and facility.INSTALLDATA = #{macSysFacility.installdata}
       </if>
-      <if test="macSysFacility.usedata != null">
+      <if test="macSysFacility.usedata != null and macSysFacility.usedata != ''">
         and facility.USEDATA = #{macSysFacility.usedata}
       </if>
-      <if test="macSysFacility.fresa != null">
+      <if test="macSysFacility.fresa != null and macSysFacility.fresa != ''">
         and facility.FRESA = #{macSysFacility.fresa}
       </if>
-      <if test="macSysFacility.fresb != null">
+      <if test="macSysFacility.fresb != null and macSysFacility.fresb != ''">
         and facility.FRESB = #{macSysFacility.fresb}
       </if>
     </where>

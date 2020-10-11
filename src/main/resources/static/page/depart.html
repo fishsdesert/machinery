@@ -101,13 +101,12 @@
                 }
                 , where: {
                     id: null,
-                    accid: data.field.accid,
-                    username: data.field.username,
-                    password: null,
-                    deptname: null,
-                    deptid: null,
-                    roletype: null,
-                    uresb: null
+                    deptid: data.field.deptid,
+                    deptname: data.field.deptname,
+                    depttype: null,
+                    roleid: null,
+                    rolename: null,
+                    dresb: null
                 }
             }, 'data');
 
@@ -120,13 +119,13 @@
         table.on('toolbar(currentTableFilter)', function (obj) {
             if (obj.event === 'add') {  // 监听添加操作
                 var index = layer.open({
-                    title: '添加用户',
+                    title: '添加部门',
                     type: 2,
                     shade: 0.2,
                     maxmin:true,
                     shadeClose: true,
                     area: ['100%', '100%'],
-                    content: '../page/table/adduser.html',
+                    content: '../page/table/adddepart.html',
                 });
                 $(window).on("resize", function () {
                     layer.full(index);
@@ -135,9 +134,10 @@
                 var selectData = layui.table.checkStatus('currentTableId').data;
                 for(var i in selectData) {
                     var roleid = selectData[i].id;
-                    layer.alert("正在删除...", function () {
+                    debugger;
+                    layer.msg("正在删除...", function () {
                         $.ajax({
-                            url: "/user/deleteuser",
+                            url: "/depart/deteledepart",
                             data: {"id": roleid},
                             type: "POST",
                             dataType: "JSON",
@@ -167,33 +167,42 @@
         table.on('checkbox(currentTableFilter)', function (obj) {
             //console.log(obj)
         });
-
         table.on('tool(currentTableFilter)', function (obj) {
             var data = obj.data;
             data.bxperson = localStorage["name"];
+            window.formData = null;
             //console.log(localStorage["name"]);
             if (obj.event === 'edit') {
-                layer.alert("正在报修...",function () {
-                    $.ajax({
-                        url : "/recold/updaterecold",
-                        data :JSON.stringify(data),
-                        type : "POST",
-                        contentType: 'application/json;charset=UTF-8',
-                        dataType : "JSON",
-                        success : function(obj) {
-                            if (obj.code == '0') {
-                                layer.msg('报修完成', function () {
-                                    return true;
-                                });
-                            }
-                        },
-                        error:function (dates) {
-                            layer.msg("报修失败");
-                            return false;
-                        }
-                    });
-                })
-                return false;
+                var index = layer.open({
+                    title: '编辑部门',
+                    type: 2,
+                    shade: 0.2,
+                    maxmin:true,
+                    shadeClose: true,
+                    area: ['100%', '100%'],
+                    content: '../page/table/editdepart.html',
+                    success: function (layero, index) {
+                        window.formData = obj.data;
+                    }
+                });
+                //执行搜索重载
+                table.reload('currentTableId', {
+                    page: {
+                        curr: 1
+                    }
+                    , where: {
+                        id: null,
+                        deptid: data.field.deptid,
+                        deptname: data.field.deptname,
+                        depttype: null,
+                        roleid: null,
+                        rolename: null,
+                        dresb: null
+                    }
+                }, 'data');
+                $(window).on("resize", function () {
+                    layer.full(index);
+                });
             }
         });
 

@@ -31,7 +31,7 @@
     <div class="layui-form-item">
         <label class="layui-form-label">所属部门</label>
         <div class="layui-input-block">
-            <select name="dept" id="type" class="layui-input"/>
+            <select name="dept" id="dept"/>
         </div>
     </div>
     <!--<div class="layui-form-item">
@@ -67,6 +67,32 @@
 </div>
 <script src="../../lib/layui-v2.5.5/layui.js" charset="utf-8"></script>
 <script>
+    window.onload= initOption;
+    function initOption() {
+        var $ = layui.jquery;
+        //获取后台下拉列表值
+        $.ajax({
+            url : '/depart/querdeparts',
+            type : "POST",
+            data : "",
+            dataType : 'JSON',
+            async : false,
+            success : function(org) {
+                var str = "<option value=''>请选择</option>";
+                var sss = org.msg;
+                var list = org.data;
+                for(var i in list){
+                    var deptid = list[i].deptid;
+                    var deptname = list[i].deptname;
+                    str+="<option value='" + deptid + "'>" + deptname + "</option>"
+                }
+
+                $("#dept").html(str);
+            }
+        });
+    }
+</script>
+<script>
     layui.use(['form'], function () {
         var form = layui.form,
             layer = layui.layer,
@@ -77,9 +103,22 @@
             var index = layer.alert(JSON.stringify(data.field), {
                 title: '最终的提交信息'
             }, function () {
+                $.ajax({
+                    url : '/user/insertuser',
+                    type : "POST",
+                    data : {
+                        username:"",
+                        password:"",
+                        deptname:""
+                    },
+                    dataType : 'JSON',
+                    async : false,
+                    success : function(org) {
+                        // 关闭弹出层
+                        layer.close(index);
+                    }
+                });
 
-                // 关闭弹出层
-                layer.close(index);
 
                 var iframeIndex = parent.layer.getFrameIndex(window.name);
                 parent.layer.close(iframeIndex);

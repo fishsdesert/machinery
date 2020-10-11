@@ -21,11 +21,35 @@ public class MacSysDepartController {
 
     /**
      * 查询部门表
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/querdeparts",method = RequestMethod.POST)
+    public ReturnParameter querDeparts(){
+        ReturnParameter returnParameter =  new ReturnParameter();
+        try {
+            MacSysDepart macSysDepart = new MacSysDepart();
+            List<MacSysDepart> departs =  macSysDepartService.querMacSysDepart(macSysDepart);
+            returnParameter.setData(departs);
+            returnParameter.setCount(departs.size());
+            returnParameter.setCode(0);
+            returnParameter.setMsg("查询成功！");
+            return returnParameter;
+        }catch (Exception e){
+            returnParameter.setCode(500);
+            returnParameter.setCount(0);
+            returnParameter.setMsg("查询失败！");
+            return returnParameter;
+        }
+    }
+
+    /**
+     * 查询部门表
      * @param macSysDepart
      * @return
      */
     @ResponseBody
-    @RequestMapping(value = "/querdepart")
+    @RequestMapping(value = "/querdepart",method = RequestMethod.POST)
     public ReturnParameter querDepart(@RequestBody MacSysDepart macSysDepart){
         ReturnParameter returnParameter =  new ReturnParameter();
         try {
@@ -72,14 +96,22 @@ public class MacSysDepartController {
      * @return
      */
     @ResponseBody
-    @RequestMapping(value = "/intsertdepart")
+    @RequestMapping(value = "/intsertdepart",method = RequestMethod.POST)
     public ReturnParameter intsertDepart(@RequestBody MacSysDepart macSysDepart){
         ReturnParameter returnParameter =  new ReturnParameter();
         try {
-            int departs =  macSysDepartService.intsertDepart(macSysDepart);
-            returnParameter.setCount(departs);
-            returnParameter.setCode(0);
-            returnParameter.setMsg("查询成功！");
+            MacSysDepart macSysDeparts = new MacSysDepart();
+            macSysDeparts.setDeptname(macSysDepart.getDeptname());
+            List<MacSysDepart> departs =  macSysDepartService.querMacSysDepart(macSysDepart);
+            if(departs.size()==0) {
+                int depart = macSysDepartService.intsertDepart(macSysDepart);
+                returnParameter.setCount(depart);
+                returnParameter.setCode(0);
+                returnParameter.setMsg("新增成功！");
+                return returnParameter;
+            }
+            returnParameter.setCode(202);
+            returnParameter.setMsg("有重复的部门名称！");
             return returnParameter;
         }catch (Exception e){
             returnParameter.setCode(500);
@@ -102,12 +134,12 @@ public class MacSysDepartController {
             int departs =  macSysDepartService.updateDepart(macSysDepart);
             returnParameter.setCount(departs);
             returnParameter.setCode(0);
-            returnParameter.setMsg("查询成功！");
+            returnParameter.setMsg("修改成功！");
             return returnParameter;
         }catch (Exception e){
             returnParameter.setCode(500);
             returnParameter.setCount(0);
-            returnParameter.setMsg("查询失败！");
+            returnParameter.setMsg("修改失败！");
             return returnParameter;
         }
     }

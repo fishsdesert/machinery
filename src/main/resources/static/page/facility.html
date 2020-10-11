@@ -21,25 +21,25 @@
                         <div class="layui-inline">
                             <label class="layui-form-label">设备名称</label>
                             <div class="layui-input-inline">
-                                <input type="text" name="username" autocomplete="off" class="layui-input">
+                                <input type="text" name="facname" autocomplete="off" class="layui-input">
                             </div>
                         </div>
                         <div class="layui-inline">
                             <label class="layui-form-label">设备编码</label>
                             <div class="layui-input-inline">
-                                <input type="text" name="sex" autocomplete="off" class="layui-input">
+                                <input type="text" name="faccode" autocomplete="off" class="layui-input">
                             </div>
                         </div>
                         <div class="layui-inline">
                             <label class="layui-form-label">所在楼层</label>
                             <div class="layui-input-inline">
-                                <input type="text" name="city" autocomplete="off" class="layui-input">
+                                <input type="text" name="locfloor" autocomplete="off" class="layui-input">
                             </div>
                         </div>
                         <div class="layui-inline">
                             <label class="layui-form-label">所在区域</label>
                             <div class="layui-input-inline">
-                                <input type="text" name="classify" autocomplete="off" class="layui-input">
+                                <input type="text" name="locsubarea" autocomplete="off" class="layui-input">
                             </div>
                         </div>
                         <div class="layui-inline">
@@ -76,6 +76,8 @@
             elem: '#currentTableId',
             url: '/facility/selectFacility',
             toolbar: '#toolbarDemo',
+            method: 'post',
+            contentType: 'application/json;charset=UTF-8',
             defaultToolbar: ['filter', 'exports', 'print', {
                 title: '提示',
                 layEvent: 'LAYTABLE_TIPS',
@@ -92,8 +94,7 @@
                 {field: 'usedata', width: 80, title: '使用日期', sort: true},
                 {field: 'locfloor', width: 80, title: '所在楼层'},
                 {field: 'locsubarea', width: 135, title: '所在分区', sort: true},
-                {field: 'fresa', width: 80, title: '备注1'},
-                {field: 'fresb', width: 135, title: '备注2'},
+
                 {title: '操作', minWidth: 150, toolbar: '#currentTableBar', align: "center"}
             ]],
             limits: [10, 15, 20, 25, 50, 100],
@@ -105,9 +106,9 @@
         // 监听搜索操作
         form.on('submit(data-search-btn)', function (data) {
             var result = JSON.stringify(data.field);
-            layer.alert(result, {
+            /*layer.alert(result, {
                 title: '最终的搜索信息'
-            });
+            });*/
 
             //执行搜索重载
             table.reload('currentTableId', {
@@ -115,7 +116,17 @@
                     curr: 1
                 }
                 , where: {
-                    searchParams: result
+                    id:null,
+                    faccode:data.field.faccode,
+                    facname:data.field.facname,
+                    facmodel:null,
+                    spectypeL:null,
+                    usedata:null,
+                    installdata:null,
+                    locfloor:data.field.locfloor,
+                    locsubarea:data.field.locsubarea,
+                    fresa:null,
+                    fresb:null
                 }
             }, 'data');
 

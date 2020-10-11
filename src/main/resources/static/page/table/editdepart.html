@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>layui</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../lib/layui-v2.5.5/css/layui.css" media="all">
+    <link rel="stylesheet" href="../../css/public.css" media="all">
+    <style>
+        body {
+            background-color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+<div class="layui-form layuimini-form">
+    <div class="layui-form-item">
+        <label class="layui-form-label required">部门名称</label>
+        <div class="layui-input-block">
+            <input type="text" id="departname" lay-verify="required" lay-reqtext="部门名称不能为空" placeholder="请输入用部门名称" value="" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label required">部门编号</label>
+        <div class="layui-input-block">
+            <input id="number" name="departnum" lay-verify="required" lay-reqtext="部门编号不能为空" placeholder="请输入部门编号" value="" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">部门类型</label>
+        <div class="layui-input-block">
+            <select id="type" lay-verify="required" lay-search="">
+                <option value="施工部">施工部</option>
+                <option value="维修部">维修部</option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn layui-btn-normal" lay-submit lay-filter="saveBtn">确认修改</button>
+        </div>
+    </div>
+</div>
+<script src="../../lib/layui-v2.5.5/layui.js" charset="utf-8"></script>
+<script src="../../lib/jquery-3.4.1/jquery-3.4.1.min.js"></script>
+<script>
+    layui.use(['form'], function () {
+        var form = layui.form,
+            layer = layui.layer,
+            $ = layui.$;
+        var formData = window.parent.formData;
+        $("#departname").val(formData.deptname);
+        $("#number").val(formData.deptid);
+        $("#type option[value='"+formData.depttype+"']").prop("selected",true);
+        //刷新select选择框渲染
+        form.render('select');
+        //监听提交
+        form.on('submit(saveBtn)', function () {
+            layer.msg('正在修改...', function () {
+                $.ajax({
+                    url : "/depart/updatedepart",
+                    type : "POST",
+                    data : JSON.stringify({
+                        "id":formData.id,
+                        "deptname":$("#departname").val(),
+                        "deptid":$("#number").val(),
+                        "depttype":$("#type").val(),
+                        "roleid":null,
+                        "rolename":null,
+                        "dresb":null
+                    }),
+                    contentType:'application/json',
+                    dataType : "JSON",
+                    success : function(org) {
+                        if(org.code===0){
+                            alert(org.msg);
+                            var index = parent.layer.getFrameIndex(window.name);
+                            window.parent.location.reload();
+                            parent.layer.close(index);
+                        }else {
+                            alert(org.msg);
+                        }
+                    },
+                    error:function (dates) {
+                        alert(dates.msg);
+                    }
+                });
+            });
+            return false;
+        });
+
+    });
+</script>
+</body>
+</html>
