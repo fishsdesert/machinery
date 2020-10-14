@@ -83,12 +83,12 @@ public class MacSysFacilityController {
             int facilititys =  macSysFacilityService.updateFacility(macSysFacility);
             returnParameter.setCount(facilititys);
             returnParameter.setCode(0);
-            returnParameter.setMsg("查询成功！");
+            returnParameter.setMsg("修改成功！");
             return returnParameter;
         }catch (Exception e){
             returnParameter.setCode(500);
             returnParameter.setCount(0);
-            returnParameter.setMsg("查询失败！");
+            returnParameter.setMsg("修改失败！");
             return returnParameter;
         }
     }
@@ -106,12 +106,12 @@ public class MacSysFacilityController {
             int facilititys =  macSysFacilityService.insertFacility(macSysFacility);
             returnParameter.setCount(facilititys);
             returnParameter.setCode(0);
-            returnParameter.setMsg("查询成功！");
+            returnParameter.setMsg("新增成功！");
             return returnParameter;
         }catch (Exception e){
             returnParameter.setCode(500);
             returnParameter.setCount(0);
-            returnParameter.setMsg("查询失败！");
+            returnParameter.setMsg("新增失败，系统出现异常");
             return returnParameter;
         }
     }

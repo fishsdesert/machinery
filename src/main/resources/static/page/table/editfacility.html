@@ -54,7 +54,7 @@
     </div>
     <div class="layui-form-item">
         <div class="layui-input-block">
-            <button class="layui-btn layui-btn-normal" lay-submit lay-filter="saveBtn">确认保存</button>
+            <button class="layui-btn layui-btn-normal" lay-submit lay-filter="saveBtn">修改保存</button>
         </div>
     </div>
 </div>
@@ -64,15 +64,21 @@
         var form = layui.form,
             layer = layui.layer,
             $ = layui.$;
-
+        var formData = window.parent.formData;
+        $("#facname").val(formData.facname);
+        $("#faccode").val(formData.faccode);
+        $("#facmodel").val(formData.facmodel);
+        $("#spectype").val(formData.spectype);
+        $("#locfloor").val(formData.locfloor);
+        $("#locsubarea").val(formData.locsubarea);
         //监听提交
         form.on('submit(saveBtn)', function () {
-            layer.msg('正在新增...', function () {
+            layer.msg('正在修改...', function () {
                 $.ajax({
-                    url : "/facility/insertfacility",
+                    url : "/facility/updatefacility",
                     type : "POST",
                     data : JSON.stringify({
-                        "id":null,
+                        "id":formData.id,
                         "faccode":$("#faccode").val(),
                         "facname":$("#facname").val(),
                         "facmodel":$("#facmodel").val(),
