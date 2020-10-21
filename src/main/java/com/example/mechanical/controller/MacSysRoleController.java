@@ -27,7 +27,6 @@ public class MacSysRoleController {
     @Autowired
     public MacSysUserService macSysUserService;
 
-
     /**
      * 查询所有角色
      * @param macSysUser
@@ -51,4 +50,49 @@ public class MacSysRoleController {
             return returnParameter;
         }
     }
+
+    /**
+     * 查询所有角色
+     * @param macSysRole
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/selectroles")
+    public ReturnParameter selectroles(@RequestBody MacSysRole macSysRole){
+        ReturnParameter returnParameter =  new ReturnParameter();
+        try {
+            List<MacSysRole> roles =  macSysRoleService.selectrole(macSysRole);
+            returnParameter.setData(roles);
+            returnParameter.setCount(roles.size());
+            returnParameter.setCode(0);
+            returnParameter.setMsg("查询成功！");
+            return returnParameter;
+        }catch (Exception e){
+            returnParameter.setCode(500);
+            returnParameter.setCount(0);
+            returnParameter.setMsg("查询失败！");
+            return returnParameter;
+        }
+    }
+
+
+    @ResponseBody
+    @RequestMapping("/querctrole")
+    public ReturnParameter querctrole(){
+        ReturnParameter returnParameter =  new ReturnParameter();
+        try {
+            List<MacSysRole> roles =  macSysRoleService.querctrole();
+            returnParameter.setData(roles);
+            returnParameter.setCount(roles.size());
+            returnParameter.setCode(0);
+            returnParameter.setMsg("查询成功！");
+            return returnParameter;
+        }catch (Exception e){
+            returnParameter.setCode(500);
+            returnParameter.setCount(0);
+            returnParameter.setMsg("查询失败！");
+            return returnParameter;
+        }
+    }
+
 }

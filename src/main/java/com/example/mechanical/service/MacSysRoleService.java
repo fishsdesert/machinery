@@ -10,5 +10,7 @@ import java.util.List;
  * @date 2020/9/17 16:55
  */
 public interface MacSysRoleService {
-    List<MacSysRecold> selectrole(MacSysRole macSysRole);
+    List<MacSysRole> selectrole(MacSysRole macSysRole);
+
+    List<MacSysRole> querctrole();
 }

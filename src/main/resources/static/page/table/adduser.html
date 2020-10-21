@@ -31,34 +31,15 @@
     <div class="layui-form-item">
         <label class="layui-form-label">所属部门</label>
         <div class="layui-input-block">
-            <select name="dept" id="dept"/>
+            <select name="dept" id="dept"></select>
         </div>
     </div>
-    <!--<div class="layui-form-item">
-        <label class="layui-form-label">所属部门</label>
-        <div class="layui-input-block">
-            <select name="dept" id="type1" class="layui-input"/>
-        </div>
-    </div>-->
     <div class="layui-form-item">
         <label class="layui-form-label">角色类型</label>
         <div class="layui-input-block">
-            <select name="roletype" id="groupId" class="layui-input"/>
+            <select name="groupId" id="groupId"></select>
         </div>
     </div>
-    <!--<div class="layui-form-item">
-        <label class="layui-form-label">角色类型</label>
-        <div class="layui-input-block">
-            <input type="text" name="work" placeholder="请输入职业" value="" class="layui-input">
-        </div>
-    </div>-->
-
-    <!--<div class="layui-form-item layui-form-text">
-        <label class="layui-form-label">备注信息</label>
-        <div class="layui-input-block">
-            <textarea name="remark" class="layui-textarea" placeholder="请输入备注信息"></textarea>
-        </div>
-    </div>-->
     <div class="layui-form-item">
         <div class="layui-input-block">
             <button class="layui-btn layui-btn-normal" lay-submit lay-filter="saveBtn">确认保存</button>
@@ -88,6 +69,25 @@
                 }
 
                 $("#dept").html(str);
+            }
+        });
+
+        $.ajax({
+            url : '/role/querctrole',
+            type : "POST",
+            dataType : 'JSON',
+            async : false,
+            success : function(org) {
+                var str = "<option value=''>请选择</option>";
+                var sss = org.msg;
+                var list = org.data;
+                for(var i in list){
+                    var deptid = list[i].id;
+                    var deptname = list[i].rolename;
+                    str+="<option value='" + deptid + "'>" + deptname + "</option>";
+                    debugger;
+                }
+                $("#groupId").html(str);
             }
         });
     }

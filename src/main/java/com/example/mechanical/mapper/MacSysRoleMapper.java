@@ -25,5 +25,7 @@ public interface MacSysRoleMapper {
 
     int updateByPrimaryKey(MacSysRole record);
 
-    List<MacSysRecold> selectrole(@Param("macSysRole") MacSysRole macSysRole);
+    List<MacSysRole> selectrole(@Param("macSysRole") MacSysRole macSysRole);
+
+    List<MacSysRole> querctrole();
 }

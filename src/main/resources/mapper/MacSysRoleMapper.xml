@@ -70,7 +70,7 @@
     where ID = #{id,jdbcType=INTEGER}
   </update>
 
-  <select id="selectrole" resultType="com.example.mechanical.entity.MacSysRecold">
+  <select id="selectrole" resultType="com.example.mechanical.entity.MacSysRole">
     select <include refid="Base_Column_List" /> from mac_sys_role role where 1=1
     <if test="macSysRole.rolename != null">
       and role.ROLENAME = #{macSysRole.rolename}
@@ -81,6 +81,10 @@
     <if test="macSysRole.roleid != null">
       and role.ROLEID = #{macSysRole.roleid}
     </if>
+  </select>
+
+  <select id="querctrole" resultType="com.example.mechanical.entity.MacSysRole">
+    select <include refid="Base_Column_List" /> from mac_sys_role role group by role.ROLENAME
   </select>
 
 </mapper>

@@ -18,7 +18,12 @@ public class MacSysRoleServiceImpl implements MacSysRoleService {
     @Autowired
     public MacSysRoleMapper macSysRoleMapper;
     @Override
-    public List<MacSysRecold> selectrole(MacSysRole macSysRole) {
+    public List<MacSysRole> selectrole(MacSysRole macSysRole) {
         return macSysRoleMapper.selectrole(macSysRole);
+    }
+
+    @Override
+    public List<MacSysRole> querctrole() {
+        return macSysRoleMapper.querctrole();
     }
 }
