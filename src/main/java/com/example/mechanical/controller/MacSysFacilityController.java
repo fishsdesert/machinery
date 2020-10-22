@@ -54,11 +54,16 @@ public class MacSysFacilityController {
      */
     @ResponseBody
     @RequestMapping("/deletefacility")
-    public ReturnParameter deleteFacility(@RequestParam("id") Integer id){
+    public ReturnParameter deleteFacility(String id){
         ReturnParameter returnParameter =  new ReturnParameter();
         try {
-            int num =  macSysFacilityService.deleteFacility(id);
-            returnParameter.setCount(num);
+            String[] ids = id.split(",");
+            int param = 0;
+            for(int i = 0; i<ids.length;i++){
+                Integer did = Integer.parseInt(ids[i]);
+                param = macSysFacilityService.deleteFacility(did);
+            }
+            returnParameter.setCount(param);
             returnParameter.setCode(0);
             returnParameter.setMsg("删除成功！");
             return returnParameter;

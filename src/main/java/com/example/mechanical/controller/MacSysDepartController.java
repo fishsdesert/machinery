@@ -73,12 +73,18 @@ public class MacSysDepartController {
      * @return
      */
     @ResponseBody
-    @RequestMapping(value = "/deteledepart")
-    public ReturnParameter deteleDepart(@RequestParam("id") Integer id){
+    @RequestMapping("/deteledepart")
+    public ReturnParameter deteleDepart(String id){
         ReturnParameter returnParameter =  new ReturnParameter();
         try {
-            int departs =  macSysDepartService.deteleDepart(id);
-            returnParameter.setCount(departs);
+            String[] ids = id.split(",");
+            int param = 0;
+            for(int i = 0; i<ids.length;i++){
+                Integer did = Integer.parseInt(ids[i]);
+                param = macSysDepartService.deteleDepart(did);
+            }
+            //int departs =  macSysDepartService.deteleDepart(id);
+            returnParameter.setCount(param);
             returnParameter.setCode(0);
             returnParameter.setMsg("查询成功！");
             return returnParameter;
