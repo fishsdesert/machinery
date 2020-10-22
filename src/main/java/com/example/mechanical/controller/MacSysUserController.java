@@ -35,9 +35,9 @@ public class MacSysUserController {
         ReturnParameter returnParameter =  new ReturnParameter();
         try {
             MacSysUser macSysUser = new MacSysUser();
-            String md5PassWord  = MyMD5Util.MD5(passWord);
-            macSysUser.setPassword(md5PassWord);
-            //macSysUser.setPassWord(passWord);
+            //String md5PassWord  = MyMD5Util.MD5(passWord);
+            //macSysUser.setPassword(md5PassWord);
+            macSysUser.setPassword(passWord);
             macSysUser.setAccid(userName);
             List<MacSysUser> macSysUsers = macSysUserService.QuerMacSysUser(macSysUser);
             if (macSysUsers.size() == 1) {
@@ -69,7 +69,7 @@ public class MacSysUserController {
      */
     @ResponseBody
     @RequestMapping(value = "/insertuser",method = RequestMethod.POST)
-    public ReturnParameter insertUser(@RequestParam("macSysUser") MacSysUser macSysUser){
+    public ReturnParameter insertUser(@RequestBody MacSysUser macSysUser){
         ReturnParameter returnParameter = new ReturnParameter();
         String explain;
         try {

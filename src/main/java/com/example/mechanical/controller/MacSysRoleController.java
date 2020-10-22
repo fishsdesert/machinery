@@ -5,6 +5,7 @@ import com.example.mechanical.entity.MacSysRole;
 import com.example.mechanical.entity.MacSysUser;
 import com.example.mechanical.service.MacSysRoleService;
 import com.example.mechanical.service.MacSysUserService;
+import com.example.mechanical.tool.MyMD5Util;
 import com.example.mechanical.tool.ReturnParameter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -38,6 +39,7 @@ public class MacSysRoleController {
         ReturnParameter returnParameter =  new ReturnParameter();
         try {
             List<MacSysUser> users =  macSysUserService.QuerMacSysUser(macSysUser);
+            //users.forEach(sysuser -> {sysuser.setPassword(MyMD5Util.sysuser.getPassword());});
             returnParameter.setData(users);
             returnParameter.setCount(users.size());
             returnParameter.setCode(0);
