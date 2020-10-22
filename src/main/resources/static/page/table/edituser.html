@@ -48,6 +48,29 @@
 </div>
 <script src="../../lib/layui-v2.5.5/layui.js" charset="utf-8"></script>
 <script>
+    window.onload= initOption;
+    function initOption() {
+        var $ = layui.jquery;
+        $.ajax({
+            url : '/role/querctrole',
+            type : "POST",
+            dataType : 'JSON',
+            async : false,
+            success : function(org) {
+                var str = "<option>请选择</option>";
+                var sss = org.msg;
+                var list = org.data;
+                for(var i in list){
+                    var deptid = list[i].id;
+                    var deptname = list[i].rolename;
+                    str+="<option>" + deptname + "</option>";
+                }
+                $("#groupId").html(str);
+            }
+        });
+    }
+</script>
+<script>
     layui.use(['form'], function () {
         var form = layui.form,
             layer = layui.layer,
@@ -55,31 +78,66 @@
         var formData = window.parent.formData;
         $("#username").val(formData.username);
         $("#password").val(formData.password);
-        debugger;
-        $("#type option[value='"+formData.deptname+"']").prop("selected",true);
-        //刷新select选择框渲染
+        var deptnames = formData.deptname;
+        var roletype = formData.username;
+        $.ajax({
+            url : '/role/querctrole',
+            type : "POST",
+            dataType : 'JSON',
+            async : false,
+            success : function(org) {
+                var str = "<option>" + roletype + "</option>";
+                var sss = org.msg;
+                var list = org.data;
+                for(var i in list){
+                    var deptid = list[i].id;
+                    var deptname = list[i].rolename;
+                    debugger;
+                    if(deptname !== roletype){
+                        str+="<option>" + deptname + "</option>";
+                    }
+                }
+                $("#groupId").html(str);
+                //form.render('select');
+            }
+        });
+        $.ajax({
+            url : '/depart/querdeparts',
+            type : "POST",
+            data : "",
+            dataType : 'JSON',
+            async : false,
+            success : function(org) {
+                var str = "<option>" + deptnames + "</option>";
+                var sss = org.msg;
+                var list = org.data;
+                for(var i in list){
+                    var deptid = list[i].deptid;
+                    var deptname = list[i].deptname;
+                    if(deptnames !== deptname){
+                        str+="<option>" + deptname + "</option>";
+                    }
+                }
+                $("#dept").html(str);
+                //form.render('select');
+            }
+        });
         form.render('select');
-        $("#type option[value='"+formData.roletype+"']").prop("selected",true);
-        //刷新select选择框渲染
-        form.render('select');
-        //监听提交
+
         form.on('submit(saveBtn)', function () {
             layer.msg('正在修改...', function () {
                 $.ajax({
-                    url : "/facility/updatefacility",
+                    url : "/user/updateuser",
                     type : "POST",
                     data : JSON.stringify({
                         "id":formData.id,
-                        "faccode":$("#faccode").val(),
-                        "facname":$("#facname").val(),
-                        "facmodel":$("#facmodel").val(),
-                        "spectype":$("#spectype").val(),
-                        "locfloor":$("#locfloor").val(),
-                        "installdata":null,
-                        "usedata":null,
-                        "fresa":null,
-                        "fresb":null,
-                        "locsubarea":$("#locsubarea").val()
+                        "accid":formData.accid,
+                        "password":$("#password").val(),
+                        "username":$("#username").val(),
+                        "deptname":$("#dept").val(),
+                        "deptid":formData.deptid,
+                        "roletype":$("#groupId").val(),
+                        "uresb":formData.uresb
                     }),
                     contentType:'application/json',
                     dataType : "JSON",

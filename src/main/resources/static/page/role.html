@@ -144,34 +144,38 @@
                 });
             } else if (obj.event === 'delete') {  // 监听删除操作
                 var selectData = layui.table.checkStatus('currentTableId').data;
-                for(var i in selectData) {
-                    var roleid = selectData[i].id;
-                    layer.alert("正在删除...", function () {
-                        $.ajax({
-                            url: "/user/deleteuser",
-                            data: {"id": roleid},
-                            type: "POST",
-                            dataType: "JSON",
-                            success: function (obj) {
-                                if (obj.code == '0') {
-                                    layer.msg('删除成功', function () {
-                                        table.reload('currentTableId', {
-                                            page: {
-                                                curr: 1
-                                            }
-                                        }, 'data');
-                                        return true;
-                                    });
-                                }
-                            },
-                            error: function (dates) {
-                                layer.msg("删除失败");
-                                return false;
-                            }
-                        });
-                    })
+
+                var num = selectData.length
+                var roleid="";
+                 for(var i in selectData) {
+                     roleid += selectData[i].id + "," ;
                 }
-            }
+
+                layer.alert("正在删除...", function () {
+                    $.ajax({
+                        url: "/user/deleteuser",
+                        data: {"id": roleid},
+                        type: "get",
+                        dataType: "JSON",
+                        success: function (obj) {
+                            if (obj.code == '0') {
+                                layer.msg('删除成功', function () {
+                                    table.reload('currentTableId', {
+                                        page: {
+                                            curr: 1
+                                        }
+                                    }, 'data');
+                                    return true;
+                                });
+                            }
+                        },
+                        error: function (dates) {
+                            layer.msg("删除失败");
+                            return false;
+                        }
+                    });
+                })
+             }
         });
 
         //监听表格复选框选择
