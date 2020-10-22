@@ -25,7 +25,7 @@
     <div class="layui-form-item">
         <label class="layui-form-label required">密码</label>
         <div class="layui-input-block">
-            <input type="number" id="password" name="phone" lay-verify="required" lay-reqtext="密码不能为空" placeholder="请输入密码" value="" class="layui-input">
+            <input id="password" name="phone" lay-verify="required" lay-reqtext="密码不能为空" placeholder="请输入密码" value="" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
@@ -48,69 +48,38 @@
 </div>
 <script src="../../lib/layui-v2.5.5/layui.js" charset="utf-8"></script>
 <script>
-    window.onload= initOption;
-    function initOption() {
-        var $ = layui.jquery;
-        //获取后台下拉列表值
-        $.ajax({
-            url : '/depart/querdeparts',
-            type : "POST",
-            data : "",
-            dataType : 'JSON',
-            async : false,
-            success : function(org) {
-                var str = "<option value=''>请选择</option>";
-                var sss = org.msg;
-                var list = org.data;
-                for(var i in list){
-                    var deptid = list[i].deptid;
-                    var deptname = list[i].deptname;
-                    str+="<option>" + deptname + "</option>"
-                }
-
-                $("#dept").html(str);
-            }
-        });
-        $.ajax({
-            url : '/role/querctrole',
-            type : "POST",
-            dataType : 'JSON',
-            async : false,
-            success : function(org) {
-                var str = "<option value=''>请选择</option>";
-                var sss = org.msg;
-                var list = org.data;
-                for(var i in list){
-                    var deptid = list[i].id;
-                    var deptname = list[i].rolename;
-                    str+="<option>" + deptname + "</option>";
-                }
-                $("#groupId").html(str);
-            }
-        });
-    }
-</script>
-<script>
     layui.use(['form'], function () {
         var form = layui.form,
             layer = layui.layer,
             $ = layui.$;
-
+        var formData = window.parent.formData;
+        $("#username").val(formData.username);
+        $("#password").val(formData.password);
+        debugger;
+        $("#type option[value='"+formData.deptname+"']").prop("selected",true);
+        //刷新select选择框渲染
+        form.render('select');
+        $("#type option[value='"+formData.roletype+"']").prop("selected",true);
+        //刷新select选择框渲染
+        form.render('select');
         //监听提交
         form.on('submit(saveBtn)', function () {
-            layer.msg('正在新增...', function () {
+            layer.msg('正在修改...', function () {
                 $.ajax({
-                    url : "/user/insertuser",
+                    url : "/facility/updatefacility",
                     type : "POST",
                     data : JSON.stringify({
-                        "id":null,
-                        "accid":null,
-                        "password":$("#password").val(),
-                        "username":$("#username").val(),
-                        "deptname":$("#dept").val(),
-                        "deptid":null,
-                        "roletype":$("#groupId").val(),
-                        "uresb":null
+                        "id":formData.id,
+                        "faccode":$("#faccode").val(),
+                        "facname":$("#facname").val(),
+                        "facmodel":$("#facmodel").val(),
+                        "spectype":$("#spectype").val(),
+                        "locfloor":$("#locfloor").val(),
+                        "installdata":null,
+                        "usedata":null,
+                        "fresa":null,
+                        "fresb":null,
+                        "locsubarea":$("#locsubarea").val()
                     }),
                     contentType:'application/json',
                     dataType : "JSON",

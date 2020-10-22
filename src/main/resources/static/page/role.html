@@ -184,26 +184,21 @@
             data.bxperson = localStorage["name"];
             //console.log(localStorage["name"]);
             if (obj.event === 'edit') {
-                layer.alert("正在报修...",function () {
-                    $.ajax({
-                        url : "/recold/updaterecold",
-                        data :JSON.stringify(data),
-                        type : "POST",
-                        contentType: 'application/json;charset=UTF-8',
-                        dataType : "JSON",
-                        success : function(obj) {
-                            if (obj.code == '0') {
-                                layer.msg('报修完成', function () {
-                                    return true;
-                                });
-                            }
-                        },
-                        error:function (dates) {
-                            layer.msg("报修失败");
-                            return false;
-                        }
-                    });
-                })
+                var index = layer.open({
+                    title: '修改用户',
+                    type: 2,
+                    shade: 0.2,
+                    maxmin:true,
+                    shadeClose: true,
+                    area: ['100%', '100%'],
+                    content: '../page/table/edituser.html',
+                    success: function (layero, index) {
+                        window.formData = obj.data;
+                    }
+                });
+                $(window).on("resize", function () {
+                    layer.full(index);
+                });
                 return false;
             }
         });
