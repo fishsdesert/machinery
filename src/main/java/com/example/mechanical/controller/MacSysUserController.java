@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.websocket.server.PathParam;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -94,12 +95,17 @@ public class MacSysUserController {
      * @return
      */
     @ResponseBody
-    @RequestMapping(value = "/deleteuser",method = RequestMethod.POST)
-    public ReturnParameter deleteUser(@RequestParam("id") Integer id){
+    @RequestMapping(value = "/deleteuser")
+    public ReturnParameter deleteUser(String id){
         ReturnParameter returnParameter = new ReturnParameter();
         String explain;
         try {
-            int param = macSysUserService.deleteUser(id);
+            String[] ids = id.split(",");
+            int param = 0;
+            for(int i = 0; i<ids.length;i++){
+                Integer did = Integer.parseInt(ids[i]);
+                param = macSysUserService.deleteUser(did);
+            }
             explain = param == 1 ? "删除成功！":"删除失败！";
             returnParameter.setCode(0);
             returnParameter.setCount(param);
@@ -121,12 +127,12 @@ public class MacSysUserController {
      */
     @ResponseBody
     @RequestMapping(value = "/updateuser",method = RequestMethod.POST)
-    public ReturnParameter updateUser(@RequestParam("returnParameter") MacSysUser macSysUser){
+    public ReturnParameter updateUser(@RequestBody MacSysUser macSysUser){
         ReturnParameter returnParameter = new ReturnParameter();
         String explain;
         try {
             int param = macSysUserService.updateUser(macSysUser);
-            explain = param < 0 ? "修改成功！":"修改失败！";
+            explain = param < 0 ? "修改失败！":"修改成功！";
             returnParameter.setCode(0);
             returnParameter.setCount(param);
             returnParameter.setMsg(explain);
